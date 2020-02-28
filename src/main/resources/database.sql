@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `n2YPKzLy0Y`.`Stations` (
   `Name` VARCHAR(45) NULL,
   `Cities_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Stations_Cities1_idx` (`Cities_id` ASC),
-  CONSTRAINT `fk_Stations_Cities1`
+  INDEX `fk_Stations_Cities_idx` (`Cities_id` ASC),
+  CONSTRAINT `fk_Stations_Cities`
     FOREIGN KEY (`Cities_id`)
     REFERENCES `n2YPKzLy0Y`.`Cities` (`id`)
     ON DELETE NO ACTION
@@ -46,9 +46,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `n2YPKzLy0Y`.`Train`
+-- Table `n2YPKzLy0Y`.`Trains`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `n2YPKzLy0Y`.`Train` (
+CREATE TABLE IF NOT EXISTS `n2YPKzLy0Y`.`Trains` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `number` VARCHAR(45) NULL,
@@ -65,22 +65,22 @@ CREATE TABLE IF NOT EXISTS `n2YPKzLy0Y`.`Paths` (
   `origin` INT NOT NULL,
   `train_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Path_Stations1_idx` (`destiny` ASC),
-  INDEX `fk_Path_Stations2_idx` (`origin` ASC),
-  INDEX `fk_Path_Train1_idx` (`train_id` ASC),
-  CONSTRAINT `fk_Path_Stations1`
+  INDEX `fk_Paths_Stations1_idx` (`destiny` ASC),
+  INDEX `fk_Paths_Stations2_idx` (`origin` ASC),
+  INDEX `fk_Paths_Trains_idx` (`train_id` ASC),
+  CONSTRAINT `fk_Paths_Stations1`
     FOREIGN KEY (`destiny`)
     REFERENCES `n2YPKzLy0Y`.`Stations` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Path_Stations2`
+  CONSTRAINT `fk_Paths_Stations2`
     FOREIGN KEY (`origin`)
     REFERENCES `n2YPKzLy0Y`.`Stations` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Path_Train1`
+  CONSTRAINT `fk_Paths_Train1`
     FOREIGN KEY (`train_id`)
-    REFERENCES `n2YPKzLy0Y`.`Train` (`id`)
+    REFERENCES `n2YPKzLy0Y`.`Trains` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
