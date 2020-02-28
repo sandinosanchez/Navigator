@@ -29,7 +29,6 @@ public class Graph {
 	}
 
 	public List<String> shortestPath(String startNodeName, String endNodeName) {
-		// key node, value parent
 		Map<String, String> parents = new HashMap<String, String>();
 		List<Node> temp = new ArrayList<Node>();
 
@@ -45,17 +44,14 @@ public class Graph {
 				Node neighbor = neighbors.get(i);
 				String nodeName = neighbor.getName();
 
-				// a node can only be visited once if it has more than one parents
 				boolean visited = parents.containsKey(nodeName);
 				if (visited) {
 					continue;
 				} else {
 					temp.add(neighbor);
 
-					// parents map can be used to get the path
 					parents.put(nodeName, currentNode.getName());
 
-					// return the shortest path if end node is reached
 					if (nodeName.equals(endNodeName)) {
 						System.out.println(parents);
 						return getPath(parents, endNodeName);
