@@ -1,5 +1,6 @@
 package com.solvd.argwinterlab.navigator.database.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Station extends AbstractModel {
@@ -15,11 +16,11 @@ public class Station extends AbstractModel {
         this.paths = paths;
     }
 
-    public Station(long id, String address, String name, List<Path> paths) {
+    public Station(long id, String address, String name) {
         super(id);
         this.address = address;
         this.name = name;
-        this.paths = paths;
+        this.paths = new ArrayList<>();
     }
 
     public String getAddress() {

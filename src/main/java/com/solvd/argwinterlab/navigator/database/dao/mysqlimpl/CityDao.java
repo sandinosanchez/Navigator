@@ -32,10 +32,10 @@ public class CityDao extends AbstractDao implements ICity {
     public List<City> getAll() {
         try (ClosableEntity ce = new ClosableEntity(getConnectionFromPropertyFile())) {
             ResultSet rs = ce.executeQuery(GET_ALL);
-            List<City> photos = new ArrayList<>();
+            List<City> cities = new ArrayList<>();
             if (rs.next()) {
-                while (rs.next()) photos.add(initializeCity(rs));
-                return photos;
+                while (rs.next()) cities.add(initializeCity(rs));
+                return cities;
             } else throw new SQLException("Not found");
         } catch (SQLException e) {
             LOGGER.error(e);

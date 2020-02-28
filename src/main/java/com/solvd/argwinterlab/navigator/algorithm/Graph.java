@@ -9,66 +9,57 @@ import com.solvd.argwinterlab.navigator.database.model.Path;
 import com.solvd.argwinterlab.navigator.database.model.Station;
 
 public class Graph {
-	private Map<String, Node<Station>> nodes = new HashMap<String, Node<Station>>();
+	private Map<String, Vertex<Station>> nodes;
 
-	public Graph() {}
+	public Graph() {
+		this.nodes = new HashMap<>();
+	}
 
 	public void addPath(Path path) {
 
-		Node<Station> node1 = new Node<Station>(path.getOrigin());
-		Node<Station> node2 = new Node<Station>(path.getDestiny());
+		Vertex<Station> origin = new Vertex<>(path.getOrigin());
+		Vertex<Station> destiny = new Vertex<>(path.getDestiny());
 
-		node1.addNeighbor(node2);
-		node2.addNeighbor(node1);
+		origin.addNeighbor(destiny);
+		destiny.addNeighbor(origin);
 
-		nodes.put(node1.getT().getName(), node1);
-		nodes.put(node2.getT().getName(), node2);
+		nodes.put(origin.getData().getName(), origin);
+		nodes.put(destiny.getData().getName(), destiny);
 	}
 
-	public List<String> shortestPath(String startNodeName, String endNodeName) {
-		Map<String, String> parents = new HashMap<String, String>();
-		List<Node<Station>> temp = new ArrayList<Node<Station>>();
+	public List<String> shortestPath(String originStation, String destinyStation) {
+		Map<String, String> parents = new HashMap<>();
+		List<Vertex<Station>> temp = new ArrayList<>();
 
-		Node<Station> start = nodes.get(startNodeName);
-		temp.add(start);
-		parents.put(startNodeName, null);
+		temp.add(nodes.get(originStation));
+		parents.put(originStation, null);
 
 		while (temp.size() > 0) {
-			Node<Station> currentNode = temp.get(0);
-			List<Node<Station>> neighbors = currentNode.getNeighbors();
+			Vertex<Station> currentVertex = temp.get(0);
+			List<Vertex<Station>> neighbors = currentVertex.getNeighbors();
 
-			for (int i = 0; i < neighbors.size(); i++) {
-				Node<Station> neighbor = neighbors.get(i);
-				String nodeName = neighbor.getT().getName();
+			for (Vertex<Station> neighbor : neighbors) {
+				String neighborStationName = neighbor.getData().getName();
 
-				boolean visited = parents.containsKey(nodeName);
-				if (visited) {
-					continue;
-				} else {
+				if (!parents.containsKey(neighborStationName)) {
 					temp.add(neighbor);
-
-					parents.put(nodeName, currentNode.getT().getName());
-
-					if (nodeName.equals(endNodeName)) {
-						System.out.println(parents);
-						return getPath(parents, endNodeName);
+					parents.put(neighborStationName, currentVertex.getData().getName());
+					if (neighborStationName.equals(destinyStation)) {
+						return getPath(parents, destinyStation);
 					}
 				}
 			}
-
 			temp.remove(0);
 		}
-
 		return null;
 	}
 
 	private List<String> getPath(Map<String, String> parents, String endNodeName) {
-		List<String> path = new ArrayList<String>();
+		List<String> path = new ArrayList<>();
 		String node = endNodeName;
 		while (node != null) {
 			path.add(0, node);
-			String parent = parents.get(node);
-			node = parent;
+			node = parents.get(node);
 		}
 		return path;
 	}
