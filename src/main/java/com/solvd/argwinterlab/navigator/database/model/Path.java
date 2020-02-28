@@ -7,6 +7,10 @@ public class Path extends AbstractModel {
 
     public Path() {}
 
+    public Path(long id) {
+        super(id);
+    }
+
     public Path(long id, Station origin, Station destiny, Train train) {
         super(id);
         this.origin = origin;
