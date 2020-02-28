@@ -32,9 +32,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `n2YPKzLy0Y`.`Stations` (
   `id` INT NOT NULL,
-  `Adress` VARCHAR(45) NULL,
-  `Name` VARCHAR(45) NULL,
-  `Cities_id` INT NOT NULL,
+  `address` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `city_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Stations_Cities_idx` (`Cities_id` ASC),
   CONSTRAINT `fk_Stations_Cities`
