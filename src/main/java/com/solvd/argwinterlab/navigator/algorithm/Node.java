@@ -3,28 +3,39 @@ package com.solvd.argwinterlab.navigator.algorithm;
 import java.util.ArrayList;
 import java.util.List;
 
-class Node {
-	String name;
-	List<Node> neighbors = new ArrayList<Node>();
+public class Node<T> {
 
-	public Node(String name) {
-		this.name = name;
+	private T t;
+
+	private List<Node<T>> neighbors = new ArrayList<Node<T>>();
+
+	public T getT() {
+		return t;
 	}
 
-	public String getName() {
-		return this.name;
+	public void setT(T t) {
+		this.t = t;
 	}
 
-	public void addNeighbor(Node neighbor) {
-		neighbors.add(neighbor);
-	}
-
-	public List<Node> getNeighbors() {
+	public List<Node<T>> getNeighbors() {
 		return neighbors;
+	}
+
+	public void setNeighbors(List<Node<T>> neighbors) {
+		this.neighbors = neighbors;
+	}
+
+	public Node(T t) {
+		this.t = t;
+	}
+
+	public void addNeighbor(Node<T> neighbor) {
+		neighbors.add(neighbor);
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return "Node [t=" + t + ", neighbors=" + neighbors + "]";
 	}
+
 }
