@@ -30,6 +30,13 @@ public class ClosableEntity implements AutoCloseable {
         return statement.executeQuery();
     }
 
+    public ResultSet executeQuery(String query, String name) throws SQLException {
+        statement = connection.prepareStatement(query);
+        statement.setString(1, name);
+        LOGGER.info("Executing query:" + statement.toString());
+        return statement.executeQuery();
+    }
+
     public void executeDelete(String query, long id) throws SQLException {
         statement = connection.prepareStatement(query);
         statement.setLong(1, id);

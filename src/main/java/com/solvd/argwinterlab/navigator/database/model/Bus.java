@@ -1,16 +1,12 @@
 package com.solvd.argwinterlab.navigator.database.model;
 
-public class Train extends AbstractEntity {
+public class Bus extends AbstractEntity {
     private String name;
 
-    public Train() {}
+    public Bus() {}
 
-    public Train(long id, String model, long weight, String name) {
+    public Bus(long id, String model, long weight, String name) {
         super(id, model, weight);
-        this.name = name;
-    }
-
-    public Train(String name, String number) {
         this.name = name;
     }
 
@@ -21,5 +17,4 @@ public class Train extends AbstractEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 }

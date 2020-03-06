@@ -13,7 +13,7 @@ import java.util.Properties;
 public class SqlConnection {
     private static Logger LOGGER = Logger.getLogger(SqlConnection.class);
 
-    public static Connection getConnectionFromPropertyFile() {
+    public static Connection getConnection() {
         try {
             Properties jdbcProperties = new Properties();
             jdbcProperties.load(new FileInputStream("src/main/resources/jdbc.properties"));

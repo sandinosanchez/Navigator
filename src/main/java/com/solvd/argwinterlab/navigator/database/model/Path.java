@@ -1,9 +1,11 @@
 package com.solvd.argwinterlab.navigator.database.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Path extends AbstractModel {
-    private Station origin;
     private Station destiny;
-    private Train train;
+    private List<AbstractEntity> entities;
 
     public Path() {}
 
@@ -11,19 +13,10 @@ public class Path extends AbstractModel {
         super(id);
     }
 
-    public Path(long id, Station origin, Station destiny, Train train) {
+    public Path(long id, Station destiny) {
         super(id);
-        this.origin = origin;
         this.destiny = destiny;
-        this.train = train;
-    }
-
-    public Station getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Station origin) {
-        this.origin = origin;
+        this.entities = new ArrayList<>();
     }
 
     public Station getDestiny() {
@@ -34,11 +27,16 @@ public class Path extends AbstractModel {
         this.destiny = destiny;
     }
 
-    public Train getTrain() {
-        return train;
+    public List<AbstractEntity> getEntities() {
+        return entities;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setEntities(List<AbstractEntity> entities) {
+        this.entities = entities;
+    }
+
+    public Path addEntity(AbstractEntity entity) {
+        this.entities.add(entity);
+        return this;
     }
 }

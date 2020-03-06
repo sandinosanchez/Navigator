@@ -3,7 +3,7 @@ package com.solvd.argwinterlab.navigator.database.dao.mysqlimpl;
 import com.solvd.argwinterlab.navigator.database.dao.ICity;
 import com.solvd.argwinterlab.navigator.database.model.City;
 import com.solvd.argwinterlab.navigator.database.utils.ClosableEntity;
-import static com.solvd.argwinterlab.navigator.database.utils.SqlConnection.getConnectionFromPropertyFile;
+import static com.solvd.argwinterlab.navigator.database.utils.SqlConnection.getConnection;
 import org.apache.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,12 +14,12 @@ public class CityDao extends AbstractDao implements ICity {
     private static final Logger LOGGER = Logger.getLogger(StationDao.class);
     private static final String GET_ALL = "SELECT * FROM Cities";
     private static final String GET_BY_ID = "SELECT * FROM Cities WHERE id = ?";
-    private static final String DELETE_BY_ID = "";
-    private static final String UPDATE_BY_ID = "";
+    private static final String DELETE_BY_ID = "DELETE FROM CITIES WHERE ID = ?";
+    private static final String UPDATE_BY_ID = "UPDATE CITIES SET ? = ? WHERE ID = ?";
 
     @Override
-    public City getById(long id) {
-        try (ClosableEntity ce = new ClosableEntity(getConnectionFromPropertyFile())) {
+    public City findById(Long id) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ResultSet rs = ce.executeQuery(GET_BY_ID, id);
             if (rs.next()) return initializeCity(rs);
         } catch (SQLException e) {
@@ -29,8 +29,8 @@ public class CityDao extends AbstractDao implements ICity {
     }
 
     @Override
-    public List<City> getAll() {
-        try (ClosableEntity ce = new ClosableEntity(getConnectionFromPropertyFile())) {
+    public List<City> findAll() {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ResultSet rs = ce.executeQuery(GET_ALL);
             List<City> cities = new ArrayList<>();
             if (rs.next()) {
@@ -44,8 +44,8 @@ public class CityDao extends AbstractDao implements ICity {
     }
 
     @Override
-    public boolean deleteById(long id) {
-        try (ClosableEntity ce = new ClosableEntity(getConnectionFromPropertyFile())) {
+    public boolean deleteById(Long id) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ce.executeDelete(DELETE_BY_ID, id);
             return true;
         } catch (SQLException e) {
@@ -55,14 +55,19 @@ public class CityDao extends AbstractDao implements ICity {
     }
 
     @Override
-    public boolean updateById(long id) {
-        try (ClosableEntity ce = new ClosableEntity(getConnectionFromPropertyFile())) {
-            ce.executeDelete(DELETE_BY_ID, id);
+    public boolean updateById(Long id) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
+            ce.executeDelete(UPDATE_BY_ID, id);
             return true;
         } catch (SQLException e) {
             LOGGER.error(e);
         }
         return false;
+    }
+
+    @Override
+    public Long save(City entity) {
+        return null;
     }
 
     private City initializeCity(ResultSet rs) throws SQLException {

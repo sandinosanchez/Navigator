@@ -2,12 +2,14 @@ package com.solvd.argwinterlab.navigator.database.dao;
 
 import java.util.List;
 
-public interface IQuery<T> {
-    T getById(long id);
+public interface IQuery<T,E> {
+    T findById(E id);
 
-    List<T> getAll();
+    List<T> findAll();
 
-    boolean deleteById(long id);
+    boolean deleteById(E id);
 
-    boolean updateById(long id);
+    boolean updateById(E id);
+
+    E save(T entity);
 }

@@ -17,13 +17,13 @@ public class Graph {
 
 	public void addPath(Path path) {
 
-		Vertex<Station> origin = new Vertex<>(path.getOrigin());
+//		Vertex<Station> origin = new Vertex<>(path.getOrigin());
 		Vertex<Station> destiny = new Vertex<>(path.getDestiny());
 
-		origin.addNeighbor(destiny);
-		destiny.addNeighbor(origin);
+//		origin.addNeighbor(destiny);
+//		destiny.addNeighbor(origin);
 
-		nodes.put(origin.getData().getName(), origin);
+//		nodes.put(origin.getData().getName(), origin);
 		nodes.put(destiny.getData().getName(), destiny);
 	}
 

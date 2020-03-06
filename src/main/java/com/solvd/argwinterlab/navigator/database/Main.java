@@ -5,6 +5,6 @@ import com.solvd.argwinterlab.navigator.database.dao.mysqlimpl.CityDao;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(new CityDao().getById(1));
+        System.out.println(new CityDao().findById(1));
     }
 }
