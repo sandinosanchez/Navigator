@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ITaxi">
+    <sql id="getTaxiTemplate">
+        <![CDATA[
+            SELECT  TE.ID AS TAXI_ID,
+                    TE.WEIGHT AS TAXI_WEIGHT,
+                    TE.MODEL AS TAXI_MODEL,
+                    T.COMPANY AS TAXI_WAGONS
+            FROM
+                dbName.TRANSPORT_ENTITY TE
+            LEFT JOIN
+                dbName.TAXIS T
+                    ON TE.ID = T.ID
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="TaxiMap">
+        <include refid="getTaxiTemplate"/>
+        <![CDATA[
+            WHERE TE.ID = #{id}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="TaxiMap">
+        <include refid="getTaxiTemplate"/>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            BEGIN;
+                 INSERT INTO dbName.TRANSPORT_ENTITY (WEIGHT, MODEL)
+                 VALUES (
+                     #{weight},
+                     #{model}
+                 );
+                 INSERT INTO dbName.TAXIS (ID, COMPANY)
+                 VALUES (
+                    LAST_INSERT_ID(),
+                    #{company}
+                 );
+            COMMIT;
+        ]]>
+    </insert>
+
+    <update id="updateById">
+        <![CDATA[UPDATE
+                    dbName.TRANSPORT_ENTITY
+        ]]>
+        <set>
+            <if test="weight != null">
+                <![CDATA[ WEIGHT = #{weight}, ]]>
+            </if>
+            <if test="model != null">
+                <![CDATA[ MODEL = #{model}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE ID = #{id}
+        ]]>
+    </update>
+
+    <delete id="delete">
+        <![CDATA[
+            DELETE dbName.TRANSPORT_ENTITY
+            WHERE ID = #{id}
+        ]]>
+    </delete>
+
+    <resultMap id="TaxiMap" autoMapping="false" type="Taxi">
+        <id property="id" column="TAXI_ID"/>
+        <result property="model" column="TAXI_MODEL"/>
+        <result property="weight" column="TAXI_WEIGHT"/>
+        <result property="company" column="TAXI_COMPANY"/>
+    </resultMap>
+</mapper>

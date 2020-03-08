@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.solvd.argwinterlab.navigator.database.model.Path;
-import com.solvd.argwinterlab.navigator.database.model.Station;
+import com.solvd.argwinterlab.navigator.db.model.Path;
+import com.solvd.argwinterlab.navigator.db.model.Station;
 
 public class Graph {
 	private Map<String, Vertex<Station>> nodes;

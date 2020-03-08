@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ITrain">
+    <sql id="getTrainTemplate">
+        <![CDATA[
+            SELECT  TE.ID AS TRAIN_ID,
+                    TE.WEIGHT AS TRAIN_WEIGHT,
+                    TE.MODEL AS TRAIN_MODEL,
+                    T.WAGONS_AMOUNT AS TRAIN_WAGONS
+            FROM
+                dbName.TRANSPORT_ENTITY TE
+            LEFT JOIN
+                dbName.TRAINS T
+                    ON TE.ID = T.ID
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="TrainMap">
+        <include refid="getTrainTemplate"/>
+        <![CDATA[
+            WHERE TE.ID = #{id}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="TrainMap">
+        <include refid="getUserTemplate"/>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            BEGIN;
+                 INSERT INTO dbName.TRANSPORT_ENTITY (WEIGHT, MODEL)
+                 VALUES (
+                     #{weight},
+                     #{model}
+                 );
+                 INSERT INTO dbName.TRAINS (ID, WAGONS_AMOUNT)
+                 VALUES (
+                    LAST_INSERT_ID(),
+                    #{wagons}
+                 );
+            COMMIT;
+        ]]>
+    </insert>
+
+    <update id="updateById">
+        <![CDATA[UPDATE
+                    dbName.TRANSPORT_ENTITY
+        ]]>
+        <set>
+            <if test="weight != null">
+                <![CDATA[ WEIGHT = #{weight}, ]]>
+            </if>
+            <if test="model != null">
+                <![CDATA[ MODEL = #{model}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE ID = #{id}
+        ]]>
+    </update>
+
+    <delete id="delete">
+        <![CDATA[
+            DELETE dbName.TRANSPORT_ENTITY
+            WHERE ID = #{id}
+        ]]>
+    </delete>
+
+    <resultMap id="TrainMap" autoMapping="false" type="Train">
+        <id property="id" column="TRAIN_ID"/>
+        <result property="model" column="TRAIN_MODEL"/>
+        <result property="weight" column="TRAIN_WEIGHT"/>
+        <result property="wagons" column="TRAIN_WAGONS"/>
+    </resultMap>
+</mapper>
