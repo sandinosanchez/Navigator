@@ -64,7 +64,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE dbName.TRANSPORT_ENTITY
+            DELETE FROM dbName.TRANSPORT_ENTITY
             WHERE ID = #{id}
         ]]>
     </delete>

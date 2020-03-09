@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.IStation">
+    <sql id="getStationTemplate">
+        <![CDATA[
+            SELECT  S.ID AS STATION_ID,
+                    S.NAME AS STATION_NAME,
+                    S.ADDRESS AS STATION_ADDRESS,
+                    P.DESTINY_ID AS STATION_DESTINY_ID
+            FROM
+                dbName.STATIONS S
+            LEFT JOIN
+                dbName.PATHS P
+                    ON S.ID = P.ORIGIN_ID
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="StationMap">
+        <include refid="getStationTemplate"/>
+        <![CDATA[
+            WHERE TE.ID = #{id}
+        ]]>
+    </select>
+
+    <select id="findByName" resultMap="StationMap">
+        <include refid="getStationTemplate"/>
+        <![CDATA[
+            WHERE TE.NAME = #{name}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="StationMap">
+        <include refid="getStationTemplate"/>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+                 INSERT INTO dbName.STATIONS (NAME, ADDRESS)
+                 VALUES (
+                     #{name},
+                     #{address}
+                 );
+        ]]>
+    </insert>
+
+    <update id="updateById">
+        <![CDATA[UPDATE
+                    dbName.STATIONS
+        ]]>
+        <set>
+            <if test="name != null">
+                <![CDATA[ NAME = #{name}, ]]>
+            </if>
+            <if test="address != null">
+                <![CDATA[ ADDRESS = #{address}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE ID = #{id}
+        ]]>
+    </update>
+
+    <delete id="delete">
+        <![CDATA[
+            DELETE FROM dbName.STATIONS
+            WHERE ID = #{id}
+        ]]>
+    </delete>
+
+    <resultMap id="StationMap" autoMapping="false" type="Train">
+        <id property="id" column="BUS_ID"/>
+        <result property="model" column="BUS_MODEL"/>
+        <result property="weight" column="BUS_WEIGHT"/>
+        <result property="wagons" column="BUS_WAGONS"/>
+        <result property="name" column="BUS_NAME"/>
+    </resultMap>
+</mapper>

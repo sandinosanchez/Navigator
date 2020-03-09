@@ -61,7 +61,7 @@
                 <![CDATA[ WEIGHT = #{weight}, ]]>
             </if>
             <if test="model != null">
-                <![CDATA[ MODEL = #{model}, ]]>
+                <![CDATA[ MODEL = #{model} ]]>
             </if>
         </set>
         <![CDATA[
@@ -71,12 +71,12 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE dbName.TRANSPORT_ENTITY
+            DELETE FROM dbName.TRANSPORT_ENTITY
             WHERE ID = #{id}
         ]]>
     </delete>
 
-    <resultMap id="TrainMap" autoMapping="false" type="Train">
+    <resultMap id="BusMap" autoMapping="false" type="Bus">
         <id property="id" column="BUS_ID"/>
         <result property="model" column="BUS_MODEL"/>
         <result property="weight" column="BUS_WEIGHT"/>
