@@ -26,7 +26,7 @@
         ]]>
     </select>
 
-    <select id="findAll" resultMap="BusMap">
+    <select id="findAll" resultMap="PathMap">
         <include refid="getPathTemplate"/>
     </select>
 
@@ -62,7 +62,7 @@
         ]]>
     </delete>
 
-    <resultMap id="TrainMap" autoMapping="false" type="Train">
+    <resultMap id="PathMap" autoMapping="false" type="Train">
         <id property="id" column="PATH_ID"/>
         <association property="destiny" resultMap="com.solvd.argwinterlab.navigator.db.dao.IStation.StationMap"/>
         <discriminator javaType="int" column="TRANSPORT_ENTITY_TYPE">

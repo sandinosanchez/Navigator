@@ -1,6 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.model;
 
-public class Bus extends AbstractTransportEntity {
+public class Bus extends AbstractTransport {
     private String name;
 
     public Bus() {}

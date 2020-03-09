@@ -69,11 +69,12 @@
         ]]>
     </delete>
 
-    <resultMap id="StationMap" autoMapping="false" type="Train">
-        <id property="id" column="BUS_ID"/>
-        <result property="model" column="BUS_MODEL"/>
-        <result property="weight" column="BUS_WEIGHT"/>
-        <result property="wagons" column="BUS_WAGONS"/>
-        <result property="name" column="BUS_NAME"/>
+    <resultMap id="StationMap" autoMapping="false" type="Station">
+        <id property="id" column="STATION_ID"/>
+        <result property="name" column="STATION_NAME"/>
+        <result property="address" column="STATION_ADDRESS"/>
+        <collection property="paths"
+                    ofType="Path"
+                    resultMap="com.solvd.argwinterlab.navigator.db.dao.IPath.PathMap"/>
     </resultMap>
 </mapper>

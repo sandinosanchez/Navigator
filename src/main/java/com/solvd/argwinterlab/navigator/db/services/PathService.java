@@ -20,13 +20,13 @@ public class PathService {
         this.busDao = new BusDao();
     }
 
-    public Path findById(long id) {
-        return pathDao
-                .findById(id)
-                .addEntity(trainDao.findById(id))
-                .addEntity(busDao.findById(id))
-                .setDestiny(stationDao.findById());
-    }
+//    public Path findById(long id) {
+//        return pathDao
+//                .findById(id)
+//                .addEntity(trainDao.findById(id))
+//                .addEntity(busDao.findById(id))
+//                .setDestiny(stationDao.findById());
+//    }
 
     public IStation getStationDao() {
         return stationDao;
