@@ -5,15 +5,16 @@
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ITaxi">
     <sql id="getTaxiTemplate">
         <![CDATA[
-            SELECT  TE.ID AS TAXI_ID,
-                    TE.WEIGHT AS TAXI_WEIGHT,
-                    TE.MODEL AS TAXI_MODEL,
+            SELECT  TS.ID AS TAXI_ID,
+                    TS.WEIGHT AS TAXI_WEIGHT,
+                    TS.MODEL AS TAXI_MODEL,
+                    TS.NAME AS TAXI_NAME,
                     T.COMPANY AS TAXI_WAGONS
             FROM
-                dbName.TRANSPORT_ENTITY TE
+                dbName.TRANSPORTS TS
             LEFT JOIN
                 dbName.TAXIS T
-                    ON TE.ID = T.ID
+                    ON TS.ID = T.ID
         ]]>
     </sql>
 
@@ -31,8 +32,9 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             BEGIN;
-                 INSERT INTO dbName.TRANSPORT_ENTITY (WEIGHT, MODEL)
+                 INSERT INTO dbName.TRANSPORTS (WEIGHT, MODEL, NAME)
                  VALUES (
+                     #{name},
                      #{weight},
                      #{model}
                  );
@@ -73,6 +75,7 @@
         <id property="id" column="TAXI_ID"/>
         <result property="model" column="TAXI_MODEL"/>
         <result property="weight" column="TAXI_WEIGHT"/>
+        <result property="name" column="TAXI_NAME"/>
         <result property="company" column="TAXI_COMPANY"/>
     </resultMap>
 </mapper>

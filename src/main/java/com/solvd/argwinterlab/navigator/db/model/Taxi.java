@@ -5,8 +5,8 @@ public class Taxi extends AbstractTransport {
 
     public Taxi() {}
 
-    public Taxi(long id, long weight, String model, String company) {
-        super(id, model, weight);
+    public Taxi(long id, long weight, String model, String name, String company) {
+        super(id, model, weight, name);
         this.company = company;
     }
 

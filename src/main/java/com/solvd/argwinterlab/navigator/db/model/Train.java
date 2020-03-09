@@ -5,8 +5,8 @@ public class Train extends AbstractTransport {
 
     public Train() {}
 
-    public Train(long id, String model, long weight, int wagons) {
-        super(id, model, weight);
+    public Train(long id, String model, long weight, String name, int wagons) {
+        super(id, model, weight, name);
         this.wagons = wagons;
     }
 

@@ -7,15 +7,16 @@
         <![CDATA[
             SELECT  P.ID AS PATH_ID,
                     P.DESTINY_ID AS PATH_DESTINY_STATION_ID,
-                    TE.ID AS TRANSPORT_ENTITY_ID,
-                    TE.MODEL AS TRANSPORT_ENTITY_MODEL,
-                    TE.WEIGHT AS TRANSPORT_ENTITY_WEIGHT,
-                    TE.TRANSPORT_TYPE AS TRANSPORT_ENTITY_TYPE
+                    TS.ID AS TRANSPORT_ID,
+                    TS.MODEL AS TRANSPORT_MODEL,
+                    TS.WEIGHT AS TRANSPORT_WEIGHT,
+                    TS.NAME AS TRANSPORT_NAME,
+                    TS.TRANSPORT_TYPE AS TRANSPORT_TYPE
             FROM
                 dbName.PATHS P
             LEFT JOIN
-                dbName.TRANSPORT_ENTITY TE
-                    ON P.ID = TE.PATH_ID
+                dbName.TRANSPORTS TS
+                    ON P.ID = TS.PATH_ID
         ]]>
     </sql>
 
@@ -40,7 +41,7 @@
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    dbName.TRANSPORT_ENTITY
+                    dbName.TRANSPORTS
         ]]>
         <set>
             <if test="weight != null">
@@ -48,6 +49,9 @@
             </if>
             <if test="model != null">
                 <![CDATA[ MODEL = #{model}, ]]>
+            </if>
+            <if test="name != null">
+                <![CDATA[ NAME = #{name} ]]>
             </if>
         </set>
         <![CDATA[
@@ -57,23 +61,29 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM dbName.TRANSPORT_ENTITY
+            DELETE FROM dbName.TRANSPORTS
             WHERE ID = #{id}
         ]]>
     </delete>
 
-    <resultMap id="PathMap" autoMapping="false" type="Train">
+    <resultMap id="PathMap" autoMapping="false" type="Path">
         <id property="id" column="PATH_ID"/>
-        <association property="destiny" resultMap="com.solvd.argwinterlab.navigator.db.dao.IStation.StationMap"/>
-        <discriminator javaType="int" column="TRANSPORT_ENTITY_TYPE">
+        <association property="destiny" resultMap="com.solvd.argwinterlab.navigator.db.dao.IStation.SimpleStationMap"/>
+        <discriminator javaType="int" column="TRANSPORT_TYPE">
             <case value="1">
-                <collection property="transportEntities" resultMap="com.solvd.argwinterlab.navigator.db.dao.ITaxi.TaxiMap"/>
+                <collection property="transportEntities"
+                            ofType="Taxi"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.ITaxi.TaxiMap"/>
             </case>
             <case value="2">
-                <collection property="transportEntities" resultMap="com.solvd.argwinterlab.navigator.db.dao.ITrain.TrainMap"/>
+                <collection property="transportEntities"
+                            ofType="Train"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.ITrain.TrainMap"/>
             </case>
             <case value="3">
-                <collection property="transportEntities" resultMap="com.solvd.argwinterlab.navigator.db.dao.IBus.BusMap"/>
+                <collection property="transportEntities"
+                            ofType="Bus"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.IBus.BusMap"/>
             </case>
         </discriminator>
     </resultMap>

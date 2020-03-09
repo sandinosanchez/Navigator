@@ -1,20 +1,20 @@
 package com.solvd.argwinterlab.navigator.db.model;
 
 public class Bus extends AbstractTransport {
-    private String name;
+    private String line;
 
     public Bus() {}
 
-    public Bus(long id, String model, long weight, String name) {
-        super(id, model, weight);
-        this.name = name;
+    public Bus(long id, String model, long weight, String name, String line) {
+        super(id, model, weight, name);
+        this.line = line;
     }
 
-    public String getName() {
-        return name;
+    public String getLine() {
+        return line;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLine(String line) {
+        this.line = line;
     }
 }
