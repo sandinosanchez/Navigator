@@ -22,13 +22,14 @@ public class Main {
         try (SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession(true)) {
             StationMapper stationMapper = session.getMapper(StationMapper.class);
             PathMapper pathMapper = session.getMapper(PathMapper.class);
+            CityMapper cityMapper = session.getMapper(CityMapper.class);
 
 //            City city = cityMapper.findById(1);
 //            System.out.println(city.toString());
-            List<Station> station = stationMapper.findAll();
-            System.out.println(station.toString());
-            Station station1 = stationMapper.findById(1);
-            System.out.println(station1.toString());
+////            List<Station> station = stationMapper.findAll();
+////            System.out.println(station.toString());
+//            Station station1 = stationMapper.findById(1);
+//            System.out.println(station1.toString());
             Path path = pathMapper.findById(1);
             System.out.println(path.toString());
 

@@ -14,7 +14,7 @@ public class ConnectionFactory {
     static {
         Reader reader;
         try {
-            reader = Resources.getResourceAsReader("mappers/mybatis-config.xml");
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

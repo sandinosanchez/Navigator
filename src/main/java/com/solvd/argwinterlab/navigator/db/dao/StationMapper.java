@@ -8,8 +8,14 @@ public interface StationMapper {
 
     Station findById(long id);
 
-    Station findByCityId(long id);
+    Station findByName(String name);
+
+    List<Station> findAllByCityId(long id);
 
     List<Station> findAll();
+
+    void updateById(Station station);
+
+    void deleteById(long id);
 
 }

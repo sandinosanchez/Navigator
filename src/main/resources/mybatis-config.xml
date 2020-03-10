@@ -5,6 +5,7 @@
 <configuration>
     <properties resource="db.properties"/>
     <typeAliases>
+        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.AbstractTransport" alias="AbstractTransport"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.City" alias="City"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Bus" alias="Bus"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Taxi" alias="Taxi"/>

@@ -20,10 +20,7 @@ public class Train extends AbstractTransport {
 
     @Override
     public String toString() {
-        return "Train{" +
-                "id=" + super.getId() +
-                ", model=" + super.getModel() +
-                ", weight=" + super.getWeight() +
+        return super.toString() +
                 ", wagons=" + wagons +
                 '}';
     }

@@ -9,7 +9,13 @@ public class Station extends AbstractModel {
     private String name;
     private List<Path> paths;
 
-    private Station() {}
+    public Station() {}
+
+    public Station(long id, String address, String name) {
+        this.address = address;
+        this.name = name;
+        this.paths = new ArrayList<>();
+    }
 
 
     public String getAddress() {
@@ -32,8 +38,9 @@ public class Station extends AbstractModel {
         return paths;
     }
 
-    public void setPaths(List<Path> paths) {
+    public Station setPaths(List<Path> paths) {
         this.paths = paths;
+        return this;
     }
 
     @Override

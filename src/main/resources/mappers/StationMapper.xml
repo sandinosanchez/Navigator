@@ -8,7 +8,8 @@
             SELECT  S.ID AS STATION_ID,
                     S.NAME AS STATION_NAME,
                     S.ADDRESS AS STATION_ADDRESS,
-                    P.DESTINY_ID AS STATION_DESTINY_ID
+                    P.DESTINY_ID AS STATION_DESTINY_ID,
+                    P.ID AS PATH_ID
             FROM
                 nav_db.STATIONS S
             LEFT JOIN
@@ -83,7 +84,9 @@
         <id property="id" column="STATION_ID"/>
         <result property="name" column="STATION_NAME"/>
         <result property="address" column="STATION_ADDRESS"/>
-        <collection property="paths" ofType="Path" resultMap="com.solvd.argwinterlab.navigator.db.dao.PathMapper.PathMap"/>
+        <collection property="paths"
+                    ofType="Path"
+                    resultMap="com.solvd.argwinterlab.navigator.db.dao.PathMapper.PathMap"/>
     </resultMap>
     <resultMap id="SimpleStationMap" autoMapping="false" type="Station">
         <id property="id" column="STATION_ID"/>

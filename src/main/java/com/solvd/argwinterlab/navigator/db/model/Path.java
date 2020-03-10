@@ -52,7 +52,7 @@ public class Path extends AbstractModel {
     public String toString() {
         return "Path{" +
                 "destiny=" + destiny +
-                ", transports=" + transports +
+                ", transports=" + transports.toString() +
                 '}';
     }
 }

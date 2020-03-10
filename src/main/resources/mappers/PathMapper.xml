@@ -7,9 +7,19 @@
         <![CDATA[
             SELECT
                 PA.ID AS PATH_ID,
-                PA.DESTINY_ID AS PATH_DESTINY_STATION_ID
+                PA.DESTINY_ID AS PATH_DESTINY_STATION_ID,
+                TS.MODEL AS TRANSPORT_MODEL,
+                TS.NAME AS TRANSPORT_NAME,
+                TS.WEIGHT AS TRANSPORT_WEIGHT,
+                TS.TRANSPORT_TYPE AS TRANSPORT_TYPE
             FROM
                 nav_db.PATHS PA
+            LEFT JOIN
+                nav_db.PATH_has_TRANSPORTS PT
+                    ON PA.ID = PT.PATH_ID
+            LEFT JOIN
+                nav_db.TRANSPORTS TS
+                    ON TS.ID = PT.TRANSPORT_ID
         ]]>
     </sql>
 
@@ -61,7 +71,26 @@
 
     <resultMap id="PathMap" autoMapping="false" type="Path">
         <id property="id" column="PATH_ID"/>
-        <association property="destiny" column="PATH_DESTINY_STATION_ID"
-                     javaType="Station" select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findSimpleStationById"/>
+        <association property="destiny"
+                     column="PATH_DESTINY_STATION_ID"
+                     javaType="Station"
+                     select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findSimpleStationById"/>
+        <discriminator javaType="int" column="TRANSPORT_TYPE">
+            <case value="1">
+                <collection property="transports"
+                            ofType="AbstractTransport"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.TaxiMapper.TaxiMap"/>
+            </case>
+            <case value="2">
+                <collection property="transports"
+                            ofType="AbstractTransport"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.TrainMapper.TrainMap"/>
+            </case>
+            <case value="3">
+                <collection property="transports"
+                            ofType="AbstractTransport"
+                            resultMap="com.solvd.argwinterlab.navigator.db.dao.BusMapper.BusMap"/>
+            </case>
+        </discriminator>
     </resultMap>
 </mapper>

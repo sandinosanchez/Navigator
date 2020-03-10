@@ -27,8 +27,9 @@ public class City extends AbstractModel{
         return stations;
     }
 
-    public void setStations(List<Station> stations) {
+    public City setStations(List<Station> stations) {
         this.stations = stations;
+        return this;
     }
 
     @Override
