@@ -1,17 +1,13 @@
 package com.solvd.argwinterlab.navigator;
 
+import static com.solvd.argwinterlab.navigator.algorithm.PathSearch.getPath;
+import com.solvd.argwinterlab.navigator.algorithm.Result;
 import com.solvd.argwinterlab.navigator.db.dao.CityMapper;
-import com.solvd.argwinterlab.navigator.db.dao.PathMapper;
-import com.solvd.argwinterlab.navigator.db.dao.StationMapper;
 import com.solvd.argwinterlab.navigator.db.model.*;
 import com.solvd.argwinterlab.navigator.db.utils.ConnectionFactory;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 
 public class Main {
@@ -60,6 +56,13 @@ public class Main {
 
             System.out.println(cityA);
             //System.out.println(cityB);
+
+
+            List<Result> result = getPath(
+                    cityA.getStations().stream().filter(station -> station.getName().equals("A")).findFirst().get(),
+                    cityA.getStations().stream().filter(station -> station.getName().equals("D")).findFirst().get()
+            );
+            System.out.println(result.toString());
         }
     }
 }
