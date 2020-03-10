@@ -1,12 +1,12 @@
 package com.solvd.argwinterlab.navigator.db.dao.mysqlimpl;
 
-import com.solvd.argwinterlab.navigator.db.dao.ITaxi;
+import com.solvd.argwinterlab.navigator.db.dao.TaxiMapper;
 import com.solvd.argwinterlab.navigator.db.model.Taxi;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 
-public class TaxiDao extends AbstractDao implements ITaxi {
+public class TaxiDao extends AbstractDao implements TaxiMapper {
     private static final Logger LOGGER = Logger.getLogger(TaxiDao.class);
     private static final String FIND_ALL = "";
     private static final String FIND_BY_ID = "";

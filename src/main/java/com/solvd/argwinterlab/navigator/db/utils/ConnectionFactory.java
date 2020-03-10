@@ -14,7 +14,7 @@ public class ConnectionFactory {
     static {
         Reader reader;
         try {
-            reader = Resources.getResourceAsReader("mybatis-config.xml");
+            reader = Resources.getResourceAsReader("mappers/mybatis-config.xml");
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -25,8 +25,8 @@ public class ConnectionFactory {
         return factory;
     }
 
-    public static IBus getBusMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(IBus.class);
+    public static BusMapper getBusMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(BusMapper.class);
     }
 
     public static CityMapper getCityMapper() {
@@ -37,15 +37,15 @@ public class ConnectionFactory {
         return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(PathMapper.class);
     }
 
-    public static ITaxi getTaxiMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(ITaxi.class);
+    public static TaxiMapper getTaxiMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(TaxiMapper.class);
     }
 
-    public static ITrain getTrainMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(ITrain.class);
+    public static TrainMapper getTrainMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(TrainMapper.class);
     }
 
-    public static IStation getStationMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(IStation.class);
+    public static StationMapper getStationMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(StationMapper.class);
     }
 }

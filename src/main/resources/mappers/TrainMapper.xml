@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ITrain">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.TrainMapper">
     <sql id="getTrainTemplate">
         <![CDATA[
             SELECT  TS.ID AS TRAIN_ID,

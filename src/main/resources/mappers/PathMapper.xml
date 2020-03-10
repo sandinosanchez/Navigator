@@ -6,17 +6,17 @@
     <sql id="getPathTemplate">
         <![CDATA[
             SELECT
-                P.ID AS PATH_ID,
-                P.DESTINY_ID AS PATH_DESTINY_STATION_ID
+                PA.ID AS PATH_ID,
+                PA.DESTINY_ID AS PATH_DESTINY_STATION_ID
             FROM
-                nav_db.PATHS P
+                nav_db.PATHS PA
         ]]>
     </sql>
 
     <select id="findById" resultMap="PathMap">
         <include refid="getPathTemplate"/>
         <![CDATA[
-            WHERE P.ID = #{id}
+            WHERE PA.ID = #{id}
         ]]>
     </select>
 
@@ -61,5 +61,7 @@
 
     <resultMap id="PathMap" autoMapping="false" type="Path">
         <id property="id" column="PATH_ID"/>
+        <association property="destiny" column="PATH_DESTINY_STATION_ID"
+                     javaType="Station" select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findSimpleStationById"/>
     </resultMap>
 </mapper>
