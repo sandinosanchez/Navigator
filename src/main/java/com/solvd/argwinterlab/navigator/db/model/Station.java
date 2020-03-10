@@ -17,6 +17,14 @@ public class Station extends AbstractModel {
         this.paths = new ArrayList<>();
     }
 
+    public Station(String name) {
+        this.name = name;
+        this.paths = new ArrayList<>();
+    }
+
+    public void addPath(Path path){
+        paths.add(path);
+    }
 
     public String getAddress() {
         return address;

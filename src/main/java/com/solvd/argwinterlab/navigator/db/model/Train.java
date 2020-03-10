@@ -10,6 +10,10 @@ public class Train extends AbstractTransport {
         this.wagons = wagons;
     }
 
+    public Train(String name){
+            setName(name);
+    }
+
     public int getWagons() {
         return wagons;
     }

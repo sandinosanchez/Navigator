@@ -20,6 +20,12 @@ public class Path extends AbstractModel {
         this.transports = new ArrayList<>();
     }
 
+    public Path(Station destiny, AbstractTransport transport) {
+        this.destiny = destiny;
+        this.transports = new ArrayList<>();
+        this.transports.add(transport);
+    }
+
     public Station getDestiny() {
         return destiny;
     }

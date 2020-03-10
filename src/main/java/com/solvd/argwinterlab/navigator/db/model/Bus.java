@@ -10,6 +10,10 @@ public class Bus extends AbstractTransport {
         this.line = line;
     }
 
+    public Bus(String name){
+        setName(name);
+    }
+
     public String getLine() {
         return line;
     }
