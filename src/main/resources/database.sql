@@ -8,30 +8,27 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema nav_db
 -- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `nav_db` DEFAULT CHARACTER SET utf8 ;
+USE `nav_db` ;
+SET autocommit = OFF;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Table `nav_db`.`CITIES`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `mydb`.`CITIES`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`CITIES` (
-  `ID` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `nav_db`.`CITIES` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `NAME` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`STATIONS`
+-- Table `nav_db`.`STATIONS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`STATIONS` (
-  `ID` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `nav_db`.`STATIONS` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `NAME` VARCHAR(45) NULL,
   `CITY_ID` INT NOT NULL,
   `ADDRESS` VARCHAR(45) NULL,
@@ -39,119 +36,108 @@ CREATE TABLE IF NOT EXISTS `mydb`.`STATIONS` (
   INDEX `fk_STATIONS_CITIES_idx` (`CITY_ID` ASC),
   CONSTRAINT `fk_STATIONS_CITIES`
     FOREIGN KEY (`CITY_ID`)
-    REFERENCES `mydb`.`CITIES` (`ID`)
+    REFERENCES `nav_db`.`CITIES` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PATHS`
+-- Table `nav_db`.`PATHS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PATHS` (
+CREATE TABLE IF NOT EXISTS `nav_db`.`PATHS` (
   `ORIGIN_ID` INT NOT NULL,
   `DESTINY_ID` INT NOT NULL,
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   INDEX `fk_STATIONS_has_STATIONS_STATIONS2_idx` (`DESTINY_ID` ASC),
   INDEX `fk_STATIONS_has_STATIONS_STATIONS1_idx` (`ORIGIN_ID` ASC),
   PRIMARY KEY (`ID`),
   CONSTRAINT `fk_STATIONS_has_STATIONS_STATIONS1`
     FOREIGN KEY (`ORIGIN_ID`)
-    REFERENCES `mydb`.`STATIONS` (`ID`)
+    REFERENCES `nav_db`.`STATIONS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_STATIONS_has_STATIONS_STATIONS2`
     FOREIGN KEY (`DESTINY_ID`)
-    REFERENCES `mydb`.`STATIONS` (`ID`)
+    REFERENCES `nav_db`.`STATIONS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`TRANSPORTS`
+-- Table `nav_db`.`TRANSPORTS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`TRANSPORTS` (
-  `ID` INT NOT NULL,
-  `WEGTH` INT NULL,
+CREATE TABLE IF NOT EXISTS `nav_db`.`TRANSPORTS` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `WEIGHT` INT NULL,
   `MODEL` VARCHAR(45) NULL,
   `NAME` VARCHAR(45) NULL,
-  `PATHS_ID` INT NOT NULL,
   `TRANSPORT_TYPE` INT NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `NAME_UNIQUE` (`NAME` ASC),
-  INDEX `fk_TRANSPORT_ENTITY_PATHS1_idx` (`PATHS_ID` ASC),
-  CONSTRAINT `fk_TRANSPORT_ENTITY_PATHS1`
-    FOREIGN KEY (`PATHS_ID`)
-    REFERENCES `mydb`.`PATHS` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `NAME_UNIQUE` (`NAME` ASC))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`PATHS`
+-- Table `nav_db`.`PATH_has_TRANSPORTS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PATHS` (
-  `ORIGIN_ID` INT NOT NULL,
-  `DESTINY_ID` INT NOT NULL,
-  `ID` INT NOT NULL,
-  INDEX `fk_STATIONS_has_STATIONS_STATIONS2_idx` (`DESTINY_ID` ASC),
-  INDEX `fk_STATIONS_has_STATIONS_STATIONS1_idx` (`ORIGIN_ID` ASC),
+CREATE TABLE IF NOT EXISTS `nav_db`.`PATH_has_TRANSPORTS` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `PATH_ID` INT NOT NULL,
+  `TRANSPORT_ID` INT NOT NULL,
+  
   PRIMARY KEY (`ID`),
-  CONSTRAINT `fk_STATIONS_has_STATIONS_STATIONS1`
-    FOREIGN KEY (`ORIGIN_ID`)
-    REFERENCES `mydb`.`STATIONS` (`ID`)
+  CONSTRAINT `fk_PATH_has_TRANPORTS_PATH`
+    FOREIGN KEY (`PATH_ID`)
+    REFERENCES `nav_db`.`PATHS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_STATIONS_has_STATIONS_STATIONS2`
-    FOREIGN KEY (`DESTINY_ID`)
-    REFERENCES `mydb`.`STATIONS` (`ID`)
+  CONSTRAINT `fk_PATH_has_TRANPORTS_TRANSPORT`
+    FOREIGN KEY (`TRANSPORT_ID`)
+    REFERENCES `nav_db`.`TRANSPORTS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`BUSES`
+-- Table `nav_db`.`BUSES`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`BUSES` (
+CREATE TABLE IF NOT EXISTS `nav_db`.`BUSES` (
   `ID` INT NOT NULL,
   `LINE` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `ID`
+  CONSTRAINT `fk_TRANSPORT1`
     FOREIGN KEY (`ID`)
-    REFERENCES `mydb`.`TRANSPORTS` (`ID`)
+    REFERENCES `nav_db`.`TRANSPORTS` (`ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`TRAINS`
+-- Table `nav_db`.`TRAINS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`TRAINS` (
+CREATE TABLE IF NOT EXISTS `nav_db`.`TRAINS` (
   `ID` INT NOT NULL,
   `WAGONS_AMOUNT` INT NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `ID`
+  CONSTRAINT `fk_TRANSPORT2`
     FOREIGN KEY (`ID`)
-    REFERENCES `mydb`.`TRANSPORTS` (`ID`)
+    REFERENCES `nav_db`.`TRANSPORTS` (`ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`TAXIS`
+-- Table `nav_db`.`TAXIS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`TAXIS` (
+CREATE TABLE IF NOT EXISTS `nav_db`.`TAXIS` (
   `ID` INT NOT NULL,
   `COMPANY` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `ID`
+  CONSTRAINT `fk_TRANSPORT3`
     FOREIGN KEY (`ID`)
-    REFERENCES `mydb`.`TRANSPORTS` (`ID`)
+    REFERENCES `nav_db`.`TRANSPORTS` (`ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
