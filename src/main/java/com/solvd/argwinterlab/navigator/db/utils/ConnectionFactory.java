@@ -29,12 +29,12 @@ public class ConnectionFactory {
         return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(IBus.class);
     }
 
-    public static ICity getCityMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(ICity.class);
+    public static CityMapper getCityMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(CityMapper.class);
     }
 
-    public static IPath getPathMapper() {
-        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(IPath.class);
+    public static PathMapper getPathMapper() {
+        return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(PathMapper.class);
     }
 
     public static ITaxi getTaxiMapper() {

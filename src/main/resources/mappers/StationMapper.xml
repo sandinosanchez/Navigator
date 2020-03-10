@@ -10,9 +10,9 @@
                     S.ADDRESS AS STATION_ADDRESS,
                     P.DESTINY_ID AS STATION_DESTINY_ID
             FROM
-                dbName.STATIONS S
+                nav_db.STATIONS S
             LEFT JOIN
-                dbName.PATHS P
+                nav_db.PATHS P
                     ON S.ID = P.ORIGIN_ID
         ]]>
     </sql>
@@ -37,7 +37,7 @@
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-                 INSERT INTO dbName.STATIONS (NAME, ADDRESS)
+                 INSERT INTO nav_db.STATIONS (NAME, ADDRESS)
                  VALUES (
                      #{name},
                      #{address}
@@ -47,7 +47,7 @@
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    dbName.STATIONS
+                    nav_db.STATIONS
         ]]>
         <set>
             <if test="name != null">
@@ -64,7 +64,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM dbName.STATIONS
+            DELETE FROM nav_db.STATIONS
             WHERE ID = #{id}
         ]]>
     </delete>
@@ -75,7 +75,7 @@
         <result property="address" column="STATION_ADDRESS"/>
         <collection property="paths"
                     ofType="Path"
-                    resultMap="com.solvd.argwinterlab.navigator.db.dao.IPath.PathMap"/>
+                    resultMap="com.solvd.argwinterlab.navigator.db.dao.PathMapper.PathMap"/>
     </resultMap>
     <resultMap id="SimpleStationMap" autoMapping="false" type="Station">
         <id property="id" column="STATION_ID"/>

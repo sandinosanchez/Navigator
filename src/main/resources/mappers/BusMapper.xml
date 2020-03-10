@@ -11,9 +11,9 @@
                     TS.NAME AS BUS_NAME,
                     B.LINE AS BUS_LINE
             FROM
-                dbName.TRANSPORTS TS
+                nav_db.TRANSPORTS TS
             LEFT JOIN
-                dbName.BUSES B
+                nav_db.BUSES B
                     ON TS.ID = B.TRANSPORT_ID
         ]]>
     </sql>
@@ -39,13 +39,13 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             BEGIN;
-                 INSERT INTO dbName.TRANSPORTS (WEIGHT, MODEL, NAME)
+                 INSERT INTO nav_db.TRANSPORTS (WEIGHT, MODEL, NAME)
                  VALUES (
                      #{weight},
                      #{model},
                      #{name}
                  );
-                 INSERT INTO dbName.BUSES (ID, LINE)
+                 INSERT INTO nav_db.BUSES (ID, LINE)
                  VALUES (
                     LAST_INSERT_ID(),
                     #{line}
@@ -56,7 +56,7 @@
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    dbName.TRANSPORTS
+                    nav_db.TRANSPORTS
         ]]>
         <set>
             <if test="weight != null">
@@ -76,7 +76,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM dbName.TRANSPORTS
+            DELETE FROM nav_db.TRANSPORTS
             WHERE ID = #{id}
         ]]>
     </delete>

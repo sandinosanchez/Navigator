@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ICity">
+<mapper namespace="CityMapper">
     <sql id="getCityTemplate">
         <![CDATA[
             SELECT  C.ID AS CITY_ID,
@@ -11,9 +11,9 @@
                     S.NAME AS STATION_NAME,
                     S.ADDRESS AS STATION_ADDRESS
             FROM
-                dbName.CITIES C
+                nav_db.CITIES C
             LEFT JOIN
-                dbName.STATIONS S
+                nav_db.STATIONS S
                     ON C.ID = S.CITY_ID
         ]]>
     </sql>
@@ -21,14 +21,7 @@
     <select id="findById" resultMap="CityMap">
         <include refid="getCityTemplate"/>
         <![CDATA[
-            WHERE TS.ID = #{id}
-        ]]>
-    </select>
-
-    <select id="findByName" resultMap="CityMap">
-        <include refid="getCityTemplate"/>
-        <![CDATA[
-            WHERE TS.NAME = #{name}
+            WHERE C.ID = #{id}
         ]]>
     </select>
 
@@ -38,7 +31,7 @@
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-                 INSERT INTO dbName.CITIES (NAME)
+                 INSERT INTO nav_db.CITIES (NAME)
                  VALUES (
                      #{name},
                  );
@@ -47,7 +40,7 @@
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    dbName.CITIES
+                    nav_db.CITIES
         ]]>
         <set>
             <if test="weight != null">
@@ -59,9 +52,9 @@
         ]]>
     </update>
 
-    <delete id="delete">
+    <delete id="deleteById">
         <![CDATA[
-            DELETE FROM dbName.CITIES
+            DELETE FROM nav_db.CITIES
             WHERE ID = #{id}
         ]]>
     </delete>
@@ -69,8 +62,5 @@
     <resultMap id="CityMap" autoMapping="false" type="City">
         <id property="id" column="BUS_ID"/>
         <result property="name" column="CITY_NAME"/>
-        <collection property="stations"
-                    ofType="Station"
-                    resultMap="com.solvd.argwinterlab.navigator.db.dao.IStation.StationMapper"/>
     </resultMap>
 </mapper>

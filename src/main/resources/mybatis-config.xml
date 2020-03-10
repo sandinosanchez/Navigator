@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="src/main/resources/db.properties"/>
+    <properties resource="db.properties"/>
     <typeAliases>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.City" alias="City"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Bus" alias="Bus"/>
@@ -19,7 +19,6 @@
                 <property name="username" value="${username}"/>
                 <property name="password" value="${password}"/>
                 <property name="url" value="${conn.url}"/>
-                <property name="driver" value="${com.mysql.cj.jdbc.Driver}"/>
             </dataSource>
         </environment>
     </environments>
