@@ -41,10 +41,10 @@ public abstract class AbstractTransport extends AbstractModel{
 
     @Override
     public String toString() {
-        return "AbstractTransport{" +
-                "model='" + model + '\'' +
-                ", weight=" + weight +
-                ", name='" + name + '\'' +
-                '}';
+        return  "\nAbstractTransport{" +
+                "\nmodel='" + model + "'," +
+                "\nweight=" + weight + "," +
+                "\nname='" + name + '\'' +
+                "\n}";
     }
 }

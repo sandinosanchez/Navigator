@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class City extends AbstractModel{
+public class City extends AbstractModel {
     private String name;
-    private List<Station> stations;
+    private List<Station> stations = new ArrayList<>();
+    ;
 
-    public City() {}
+    public City() {
+    }
 
     public City(long id, String name) {
         super(id);
         this.name = name;
-        this.stations = new ArrayList<>();
     }
 
     public String getName() {
@@ -37,7 +38,7 @@ public class City extends AbstractModel{
         stations.add(station);
     }
 
-    public void addPath(String origin, String destiny, AbstractTransport transport){
+    public void addPath(String origin, String destiny, AbstractTransport transport) {
         Optional<Station> originResult = stations.stream()
                 .filter(station -> station.getName().equals(origin))
                 .findFirst();
@@ -50,7 +51,7 @@ public class City extends AbstractModel{
             return;
 
         Station originStation = originResult.get();
-        Station destinyStation = originResult.get();
+        Station destinyStation = destinyResult.get();
 
         Optional<Path> originPath = originStation.getPaths().stream()
                 .filter(path -> path.getDestiny().getName().equals(destiny))
@@ -59,7 +60,7 @@ public class City extends AbstractModel{
                 .filter(path -> path.getDestiny().getName().equals(origin))
                 .findFirst();
 
-        if (originPath.isPresent() && destinyPath.isPresent()){
+        if (originPath.isPresent() && destinyPath.isPresent()) {
             originPath.get().addEntity(transport);
             destinyPath.get().addEntity(transport);
         } else {
@@ -70,9 +71,9 @@ public class City extends AbstractModel{
 
     @Override
     public String toString() {
-        return "City{" +
-                "name='" + name + '\'' +
-                ", stations=" + stations.toString() +
-                '}';
+        return  "\nCity{" +
+                "\nname='" + name + "\'," +
+                "\nstations=" + stations.toString() + "," +
+                "\n}";
     }
 }

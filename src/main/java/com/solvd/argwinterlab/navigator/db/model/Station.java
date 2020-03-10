@@ -7,19 +7,17 @@ import java.util.Map;
 public class Station extends AbstractModel {
     private String address;
     private String name;
-    private List<Path> paths;
+    private List<Path> paths = new ArrayList<>();
 
     public Station() {}
 
     public Station(long id, String address, String name) {
         this.address = address;
         this.name = name;
-        this.paths = new ArrayList<>();
     }
 
     public Station(String name) {
         this.name = name;
-        this.paths = new ArrayList<>();
     }
 
     public void addPath(Path path){
@@ -53,19 +51,10 @@ public class Station extends AbstractModel {
 
     @Override
     public String toString() {
-        String result;
-        if (paths == null) {
-            result = "Station{" +
-                    "address='" + address + '\'' +
-                    ", name='" + name + '\'' +
-                    '}';
-        } else {
-            result = "Station{" +
-                    "address='" + address + '\'' +
-                    ", name='" + name + '\'' +
-                    ", paths=" + paths.toString() +
-                    '}';
-        }
-        return result;
+        return  "\nStation{" +
+                "\naddress='" + address + "\'," +
+                "\nname='" + name + "\'," +
+                "\npaths=" + paths.toString() +
+                "\n}";
     }
 }

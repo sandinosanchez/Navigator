@@ -42,9 +42,9 @@ public class Main {
             cityA.addStation(new Station("H"));
             cityA.addStation(new Station("G"));
 
-            cityA.addStation(new Station("I"));
-            cityA.addStation(new Station("J"));
-            cityA.addStation(new Station("K"));
+            cityB.addStation(new Station("I"));
+            cityB.addStation(new Station("J"));
+            cityB.addStation(new Station("K"));
 
             cityA.addPath("A","B",tr1);
             cityA.addPath("B","C",tr1);
@@ -57,6 +57,9 @@ public class Main {
             cityA.addPath("F","G",bus1);
             cityA.addPath("G","H",bus1);
             cityA.addPath("H","A",tr1);
+
+            System.out.println(cityA);
+            //System.out.println(cityB);
         }
     }
 }

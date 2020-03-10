@@ -25,7 +25,7 @@ public class Train extends AbstractTransport {
     @Override
     public String toString() {
         return super.toString() +
-                ", wagons=" + wagons +
-                '}';
+                "\nwagons=" + wagons +
+                "\n}";
     }
 }
