@@ -5,7 +5,7 @@ public class Taxi extends AbstractTransport {
 
     public Taxi() {}
 
-    public Taxi(long id, long weight, String model, String name, String company) {
+    public Taxi(long id, int weight, String model, String name, String company) {
         super(id, model, weight, name);
         this.company = company;
     }
@@ -16,5 +16,15 @@ public class Taxi extends AbstractTransport {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + super.getId() +
+                ", model=" + super.getModel() +
+                ", weight=" + super.getWeight() +
+                ", company=" + company +
+                '}';
     }
 }

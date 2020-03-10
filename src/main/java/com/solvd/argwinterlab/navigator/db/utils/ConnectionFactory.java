@@ -48,5 +48,4 @@ public class ConnectionFactory {
     public static IStation getStationMapper() {
         return ConnectionFactory.getSqlSessionFactory().openSession(true).getMapper(IStation.class);
     }
-
 }

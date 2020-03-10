@@ -47,4 +47,12 @@ public class Path extends AbstractModel {
         this.transports.add(entity);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Path{" +
+                "destiny=" + destiny +
+                ", transports=" + transports +
+                '}';
+    }
 }

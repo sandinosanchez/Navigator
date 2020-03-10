@@ -5,7 +5,7 @@ public class Train extends AbstractTransport {
 
     public Train() {}
 
-    public Train(long id, String model, long weight, String name, int wagons) {
+    public Train(long id, String model, int weight, String name, int wagons) {
         super(id, model, weight, name);
         this.wagons = wagons;
     }
@@ -16,5 +16,15 @@ public class Train extends AbstractTransport {
 
     public void setWagons(int wagons) {
         this.wagons = wagons;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + super.getId() +
+                ", model=" + super.getModel() +
+                ", weight=" + super.getWeight() +
+                ", wagons=" + wagons +
+                '}';
     }
 }

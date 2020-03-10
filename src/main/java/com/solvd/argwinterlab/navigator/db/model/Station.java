@@ -47,4 +47,13 @@ public class Station extends AbstractModel {
     public void setPaths(List<Path> paths) {
         this.paths = paths;
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", paths=" + paths.toString() +
+                '}';
+    }
 }

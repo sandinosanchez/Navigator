@@ -81,8 +81,10 @@ public class TrainDao extends AbstractDao implements ITrain {
     private Train initializeTrain(ResultSet rs) throws SQLException {
         return new Train(rs.getLong("ID"),
                 rs.getString("MODEL"),
-                rs.getLong("WEIGHT"),
-                rs.getString("NAME"));
+                rs.getInt("WEIGHT"),
+                rs.getString("NAME"),
+                rs.getInt("WAGONS")
+        );
     }
 
 }

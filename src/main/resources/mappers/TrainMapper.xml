@@ -14,7 +14,7 @@
                 dbName.TRANSPORTS TS
             LEFT JOIN
                 dbName.TRAINS T
-                    ON TS.ID = T.ID
+                    ON TS.ID = T.TRANSPORT_ID
         ]]>
     </sql>
 

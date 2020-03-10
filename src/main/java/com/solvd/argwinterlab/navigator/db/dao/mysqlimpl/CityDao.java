@@ -71,7 +71,7 @@ public class CityDao extends AbstractDao implements ICity {
     }
 
     private City initializeCity(ResultSet rs) throws SQLException {
-        return new City(rs.getLong("id"),
-                rs.getString("name"));
+        return new City(rs.getLong("ID"),
+                rs.getString("NAME"));
     }
 }

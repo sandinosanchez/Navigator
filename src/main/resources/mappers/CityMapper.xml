@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.ICity">
+    <sql id="getCityTemplate">
+        <![CDATA[
+            SELECT  C.ID AS CITY_ID,
+                    C.NAME AS CITY_NAME,
+                    S.ID AS STATION_ID,
+                    S.NAME AS STATION_NAME,
+                    S.ADDRESS AS STATION_ADDRESS
+            FROM
+                dbName.CITIES C
+            LEFT JOIN
+                dbName.STATIONS S
+                    ON C.ID = S.CITY_ID
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="CityMap">
+        <include refid="getCityTemplate"/>
+        <![CDATA[
+            WHERE TS.ID = #{id}
+        ]]>
+    </select>
+
+    <select id="findByName" resultMap="CityMap">
+        <include refid="getCityTemplate"/>
+        <![CDATA[
+            WHERE TS.NAME = #{name}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="CityMap">
+        <include refid="getCityTemplate"/>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+                 INSERT INTO dbName.CITIES (NAME)
+                 VALUES (
+                     #{name},
+                 );
+        ]]>
+    </insert>
+
+    <update id="updateById">
+        <![CDATA[UPDATE
+                    dbName.CITIES
+        ]]>
+        <set>
+            <if test="weight != null">
+                <![CDATA[ NAME = #{name} ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE ID = #{id}
+        ]]>
+    </update>
+
+    <delete id="delete">
+        <![CDATA[
+            DELETE FROM dbName.CITIES
+            WHERE ID = #{id}
+        ]]>
+    </delete>
+
+    <resultMap id="CityMap" autoMapping="false" type="City">
+        <id property="id" column="BUS_ID"/>
+        <result property="name" column="CITY_NAME"/>
+        <collection property="stations"
+                    ofType="Station"
+                    resultMap="com.solvd.argwinterlab.navigator.db.dao.IStation.StationMapper"/>
+    </resultMap>
+</mapper>

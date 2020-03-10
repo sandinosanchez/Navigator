@@ -5,7 +5,7 @@ public class Bus extends AbstractTransport {
 
     public Bus() {}
 
-    public Bus(long id, String model, long weight, String name, String line) {
+    public Bus(long id, String model, int weight, String name, String line) {
         super(id, model, weight, name);
         this.line = line;
     }
@@ -16,5 +16,15 @@ public class Bus extends AbstractTransport {
 
     public void setLine(String line) {
         this.line = line;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + super.getId() +
+                ", model=" + super.getModel() +
+                ", weight=" + super.getWeight() +
+                ", line=" + line +
+                '}';
     }
 }

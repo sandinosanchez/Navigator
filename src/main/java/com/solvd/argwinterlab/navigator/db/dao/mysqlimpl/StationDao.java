@@ -75,7 +75,7 @@ public class StationDao extends AbstractDao implements IStation {
 
     private Station initializeStation(ResultSet rs) throws SQLException {
         return new Station(rs.getLong("id"),
-                rs.getString("address"),
-                rs.getString("name"));
+                rs.getString("ADDRESS"),
+                rs.getString("NAME"));
     }
 }

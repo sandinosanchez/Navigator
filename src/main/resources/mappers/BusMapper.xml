@@ -5,29 +5,30 @@
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.IBus">
     <sql id="getBusTemplate">
         <![CDATA[
-            SELECT  TE.ID AS BUS_ID,
-                    TE.WEIGHT AS BUS_WEIGHT,
-                    TE.MODEL AS BUS_MODEL,
-                    B.NAME AS BUS_NAME
+            SELECT  TS.ID AS BUS_ID,
+                    TS.WEIGHT AS BUS_WEIGHT,
+                    TS.MODEL AS BUS_MODEL,
+                    TS.NAME AS BUS_NAME,
+                    B.LINE AS BUS_LINE
             FROM
-                dbName.TRANSPORT_ENTITY TE
+                dbName.TRANSPORTS TS
             LEFT JOIN
                 dbName.BUSES B
-                    ON TE.ID = B.ID
+                    ON TS.ID = B.TRANSPORT_ID
         ]]>
     </sql>
 
     <select id="findById" resultMap="BusMap">
         <include refid="getBusTemplate"/>
         <![CDATA[
-            WHERE TE.ID = #{id}
+            WHERE TS.ID = #{id}
         ]]>
     </select>
 
     <select id="findByName" resultMap="BusMap">
         <include refid="getBusTemplate"/>
         <![CDATA[
-            WHERE TE.NAME = #{name}
+            WHERE TS.NAME = #{name}
         ]]>
     </select>
 
@@ -38,15 +39,16 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             BEGIN;
-                 INSERT INTO dbName.TRANSPORT_ENTITY (WEIGHT, MODEL)
+                 INSERT INTO dbName.TRANSPORTS (WEIGHT, MODEL, NAME)
                  VALUES (
                      #{weight},
-                     #{model}
+                     #{model},
+                     #{name}
                  );
-                 INSERT INTO dbName.BUSES (ID, NAME)
+                 INSERT INTO dbName.BUSES (ID, LINE)
                  VALUES (
                     LAST_INSERT_ID(),
-                    #{name}
+                    #{line}
                  );
             COMMIT;
         ]]>
@@ -54,14 +56,17 @@
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    dbName.TRANSPORT_ENTITY
+                    dbName.TRANSPORTS
         ]]>
         <set>
             <if test="weight != null">
                 <![CDATA[ WEIGHT = #{weight}, ]]>
             </if>
             <if test="model != null">
-                <![CDATA[ MODEL = #{model} ]]>
+                <![CDATA[ MODEL = #{model}, ]]>
+            </if>
+            <if test="name != null">
+                <![CDATA[ NAME = #{name} ]]>
             </if>
         </set>
         <![CDATA[
@@ -71,7 +76,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM dbName.TRANSPORT_ENTITY
+            DELETE FROM dbName.TRANSPORTS
             WHERE ID = #{id}
         ]]>
     </delete>

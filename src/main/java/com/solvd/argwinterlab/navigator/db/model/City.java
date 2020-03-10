@@ -35,7 +35,7 @@ public class City extends AbstractModel{
     public String toString() {
         return "City{" +
                 "name='" + name + '\'' +
-                ", stations=" + stations +
+                ", stations=" + stations.toString() +
                 '}';
     }
 }

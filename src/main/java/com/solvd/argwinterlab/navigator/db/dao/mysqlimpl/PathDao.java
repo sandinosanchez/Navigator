@@ -99,6 +99,6 @@ public class PathDao extends AbstractDao implements IPath {
     }
 
     private Path initializePath(ResultSet rs) throws SQLException {
-        return new Path(rs.getLong("id"));
+        return new Path(rs.getLong("ID"));
     }
 }

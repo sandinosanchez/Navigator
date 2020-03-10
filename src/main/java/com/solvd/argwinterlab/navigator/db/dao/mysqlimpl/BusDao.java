@@ -104,8 +104,9 @@ public class BusDao extends AbstractDao implements IBus {
         return new Bus(
                 rs.getLong("ID"),
                 rs.getString("MODEL"),
-                rs.getLong("WEIGHT"),
-                rs.getString("NAME")
+                rs.getInt("WEIGHT"),
+                rs.getString("NAME"),
+                rs.getString("LINE")
         );
     }
 

@@ -2,12 +2,12 @@ package com.solvd.argwinterlab.navigator.db.model;
 
 public abstract class AbstractTransport extends AbstractModel{
     private String model;
-    private long weight;
+    private int weight;
     private String name;
 
     public AbstractTransport() {}
 
-    public AbstractTransport(long id, String model, long weight, String name) {
+    public AbstractTransport(long id, String model, int weight, String name) {
         super(id);
         this.model = model;
         this.weight = weight;
@@ -22,11 +22,11 @@ public abstract class AbstractTransport extends AbstractModel{
         this.model = model;
     }
 
-    public long getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
