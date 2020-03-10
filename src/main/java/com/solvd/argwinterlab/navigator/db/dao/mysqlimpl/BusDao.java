@@ -1,6 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.dao.mysqlimpl;
 
-import com.solvd.argwinterlab.navigator.db.dao.IBus;
+import com.solvd.argwinterlab.navigator.db.dao.BusMapper;
 import com.solvd.argwinterlab.navigator.db.model.Bus;
 import com.solvd.argwinterlab.navigator.db.utils.ClosableEntity;
 import com.solvd.argwinterlab.navigator.db.utils.SqlConnection;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import static com.solvd.argwinterlab.navigator.db.utils.SqlConnection.getConnection;
 
-public class BusDao extends AbstractDao implements IBus {
+public class BusDao extends AbstractDao implements BusMapper {
     private static final Logger LOGGER = Logger.getLogger(BusDao.class);
     private static final String FIND_BY_ID = "SELECT * FROM BUSES WHERE ID = ?";
     private static final String FIND_ALL = "SELECT * FROM BUSES";

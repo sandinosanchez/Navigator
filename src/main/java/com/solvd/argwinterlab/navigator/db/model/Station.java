@@ -9,20 +9,14 @@ public class Station extends AbstractModel {
     private String name;
     private List<Path> paths;
 
-    private Station() {}
-
-    public Station(String address, String name, List<Path> paths) {
-        this.address = address;
-        this.name = name;
-        this.paths = paths;
-    }
+    public Station() {}
 
     public Station(long id, String address, String name) {
-        super(id);
         this.address = address;
         this.name = name;
         this.paths = new ArrayList<>();
     }
+
 
     public String getAddress() {
         return address;
@@ -44,16 +38,26 @@ public class Station extends AbstractModel {
         return paths;
     }
 
-    public void setPaths(List<Path> paths) {
+    public Station setPaths(List<Path> paths) {
         this.paths = paths;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Station{" +
-                "address='" + address + '\'' +
-                ", name='" + name + '\'' +
-                ", paths=" + paths.toString() +
-                '}';
+        String result;
+        if (paths == null) {
+            result = "Station{" +
+                    "address='" + address + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        } else {
+            result = "Station{" +
+                    "address='" + address + '\'' +
+                    ", name='" + name + '\'' +
+                    ", paths=" + paths.toString() +
+                    '}';
+        }
+        return result;
     }
 }

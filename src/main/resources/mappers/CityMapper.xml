@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="CityMapper">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.CityMapper">
     <sql id="getCityTemplate">
         <![CDATA[
             SELECT  C.ID AS CITY_ID,
@@ -10,11 +10,9 @@
                     S.ID AS STATION_ID,
                     S.NAME AS STATION_NAME,
                     S.ADDRESS AS STATION_ADDRESS
-            FROM
-                nav_db.CITIES C
-            LEFT JOIN
-                nav_db.STATIONS S
-                    ON C.ID = S.CITY_ID
+            FROM CITIES C
+            LEFT JOIN  STATIONS S
+                ON C.ID = S.CITY_ID
         ]]>
     </sql>
 
@@ -60,7 +58,8 @@
     </delete>
 
     <resultMap id="CityMap" autoMapping="false" type="City">
-        <id property="id" column="BUS_ID"/>
+        <id property="id" column="CITY_ID"/>
         <result property="name" column="CITY_NAME"/>
+        <collection property="stations" ofType="Station" resultMap="com.solvd.argwinterlab.navigator.db.dao.StationMapper.StationMap"/>
     </resultMap>
 </mapper>

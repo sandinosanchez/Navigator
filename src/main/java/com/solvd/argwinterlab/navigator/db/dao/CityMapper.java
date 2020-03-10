@@ -7,9 +7,11 @@ import java.util.List;
 public interface CityMapper {
     City findById(long id);
 
-    void updateById(City city);
+    City findByName(String name);
 
     List<City> findAll();
+
+    void updateById(City city);
 
     void save(City city);
 

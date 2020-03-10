@@ -1,6 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.dao.mysqlimpl;
 
-import com.solvd.argwinterlab.navigator.db.dao.IStation;
+import com.solvd.argwinterlab.navigator.db.dao.StationMapper;
 import com.solvd.argwinterlab.navigator.db.model.Station;
 import com.solvd.argwinterlab.navigator.db.utils.ClosableEntity;
 import org.apache.log4j.Logger;
@@ -12,19 +12,33 @@ import java.util.List;
 
 import static com.solvd.argwinterlab.navigator.db.utils.SqlConnection.getConnection;
 
-public class StationDao extends AbstractDao implements IStation {
+public class StationDao extends AbstractDao implements StationMapper {
     private static final Logger LOGGER = Logger.getLogger(StationDao.class);
     private static final String FIND_ALL = "SELECT * FROM STATIONS";
     private static final String FIND_BY_ID = "SELECT * FROM STATIONS WHERE ID = ?";
+    private static final String FIND_ALL_BY_CITY_ID = "SELECT * FROM STATIONS WHERE CITY_ID = ?";
+    private static final String FIND_BY_NAME = "SELECT * FROM STATIONS WHERE NAME = ?";
     private static final String DELETE_BY_ID = "DELETE FROM STATIONS WHERE ID = ?";
     private static final String UPDATE_BY_ID = "UPDATE STATIONS SET ? = ? WHERE ID = ?";
 
     @Override
-    public Station findById(Long id) {
+    public Station findById(long id) {
         try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ResultSet rs = ce.executeQuery(FIND_BY_ID, id);
             if (rs.next()) return initializeStation(rs);
             else throw new SQLException("Station with id " + id + " not found.");
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return null;
+    }
+
+    @Override
+    public Station findByName(String name) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
+            ResultSet rs = ce.executeQuery(FIND_BY_NAME, name);
+            if (rs.next()) return initializeStation(rs);
+            else throw new SQLException("Station with name " + name + " not found");
         } catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -37,7 +51,7 @@ public class StationDao extends AbstractDao implements IStation {
             ResultSet rs = ce.executeQuery(FIND_ALL);
             List<Station> stations = new ArrayList<>();
             if (rs.next()) {
-                while (rs.next()) stations.add(initializeStation(rs));
+//                while (rs.next()) stations.add(initializeStation(rs));
                 return stations;
             } else throw new SQLException("Station not found.");
         } catch (SQLException e) {
@@ -47,30 +61,36 @@ public class StationDao extends AbstractDao implements IStation {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public List<Station> findAllByCityId(long id) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
+            ResultSet rs = ce.executeQuery(FIND_ALL_BY_CITY_ID, id);
+            List<Station> stations = new ArrayList<>();
+            if (rs.next()) {
+                while (rs.next()) stations.add(initializeStation(rs));
+                return stations;
+            } else throw new SQLException("Stations not found");
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteById(long id) {
         try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ce.executeDelete(DELETE_BY_ID, id);
-            return true;
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return false;
     }
 
     @Override
-    public boolean updateById(Long id) {
+    public void updateById(Station station) {
         try (ClosableEntity ce = new ClosableEntity(getConnection())) {
-            ce.executeDelete(UPDATE_BY_ID, id);
-            return true;
+            ce.executeDelete(UPDATE_BY_ID, station.getId());
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return false;
-    }
-
-    @Override
-    public Long save(Station entity) {
-        return null;
     }
 
     private Station initializeStation(ResultSet rs) throws SQLException {

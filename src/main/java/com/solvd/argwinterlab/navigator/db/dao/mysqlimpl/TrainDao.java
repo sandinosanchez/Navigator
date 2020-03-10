@@ -1,6 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.dao.mysqlimpl;
 
-import com.solvd.argwinterlab.navigator.db.dao.ITrain;
+import com.solvd.argwinterlab.navigator.db.dao.TrainMapper;
 import com.solvd.argwinterlab.navigator.db.model.Train;
 import com.solvd.argwinterlab.navigator.db.utils.ClosableEntity;
 import org.apache.log4j.Logger;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.solvd.argwinterlab.navigator.db.utils.SqlConnection.getConnection;
 
-public class TrainDao extends AbstractDao implements ITrain {
+public class TrainDao extends AbstractDao implements TrainMapper {
     private static final Logger LOGGER = Logger.getLogger(StationDao.class);
     private static final String FIND_ALL = "SELECT * FROM TRAINS";
     private static final String FIND_BY_ID = "SELECT * FROM TRAINS WHERE ID = ?";

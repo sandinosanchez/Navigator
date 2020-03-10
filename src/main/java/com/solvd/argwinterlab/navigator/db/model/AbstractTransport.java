@@ -37,4 +37,13 @@ public abstract class AbstractTransport extends AbstractModel{
     public void setLine(String line) {
         this.name = line;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractTransport{" +
+                "model='" + model + '\'' +
+                ", weight=" + weight +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

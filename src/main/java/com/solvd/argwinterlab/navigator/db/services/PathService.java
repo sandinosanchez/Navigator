@@ -1,53 +1,56 @@
-//package com.solvd.argwinterlab.navigator.db.services;
-//
-//import com.solvd.argwinterlab.navigator.db.dao.*;
-//import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.BusDao;
-//import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.PathDao;
-//import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.StationDao;
-//import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.TrainDao;
-//
-//public class PathService {
-//    private IStation stationDao;
-//    private ITrain trainDao;
-//    private IBus busDao;
-//    private PathMapper pathDao;
-//
-//    public PathService() {
-//        this.stationDao = new StationDao();
-//        this.trainDao = new TrainDao();
-//        this.pathDao = new PathDao();
-//        this.busDao = new BusDao();
-//    }
-//
-////    public Path findById(long id) {
-////        return pathDao
-////                .findById(id)
-////                .addEntity(trainDao.findById(id))
-////                .addEntity(busDao.findById(id))
-////                .setDestiny(stationDao.findById());
-////    }
-//
-//    public IStation getStationDao() {
-//        return stationDao;
-//    }
-//
-//    public void setStationDao(IStation stationDao) {
-//        this.stationDao = stationDao;
-//    }
-//
-//    public PathMapper getPathDao() {
-//        return pathDao;
-//    }
-//
-//    public void setPathDao(PathMapper pathDao) {
-//        this.pathDao = pathDao;
-//    }
-//
-//    public IBus getBusDao() {
-//        return busDao;
-//    }
-//
-//    public void setBusDao(IBus busDao) {
-//        this.busDao = busDao;
-//    }
-//}
+package com.solvd.argwinterlab.navigator.db.services;
+
+import com.solvd.argwinterlab.navigator.db.dao.*;
+import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.BusDao;
+import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.PathDao;
+import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.TaxiDao;
+import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.TrainDao;
+import com.solvd.argwinterlab.navigator.db.model.Path;
+
+public class PathService {
+    private TaxiMapper taxiMapper;
+    private BusMapper busMapper;
+    private TrainMapper trainMapper;
+    private PathMapper pathMapper;
+
+    public PathService() {
+        this.taxiMapper = new TaxiDao();
+        this.busMapper =  new BusDao();
+        this.trainMapper = new TrainDao();
+        this.pathMapper = new PathDao();
+    }
+
+
+
+    public TaxiMapper getTaxiMapper() {
+        return taxiMapper;
+    }
+
+    public void setTaxiMapper(TaxiMapper taxiMapper) {
+        this.taxiMapper = taxiMapper;
+    }
+
+    public BusMapper getBusMapper() {
+        return busMapper;
+    }
+
+    public void setBusMapper(BusMapper busMapper) {
+        this.busMapper = busMapper;
+    }
+
+    public TrainMapper getTrainMapper() {
+        return trainMapper;
+    }
+
+    public void setTrainMapper(TrainMapper trainMapper) {
+        this.trainMapper = trainMapper;
+    }
+
+    public PathMapper getPathMapper() {
+        return pathMapper;
+    }
+
+    public void setPathMapper(PathMapper pathMapper) {
+        this.pathMapper = pathMapper;
+    }
+}
