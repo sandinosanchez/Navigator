@@ -48,7 +48,7 @@
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-                 INSERT INTO nav_db.STATIONS (NAME, ADDRESS)
+                 INSERT INTO nav_db.STATIONS (NAME, ADDRESS, CITY_ID)
                  VALUES (
                      #{name},
                      #{address}

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Path extends AbstractModel {
     private Station destiny;
+
     private List<AbstractTransport> transports;
 
     public Path() {}
@@ -17,6 +18,7 @@ public class Path extends AbstractModel {
     public Path(long id, Station destiny) {
         super(id);
         this.destiny = destiny;
+
         this.transports = new ArrayList<>();
     }
 
@@ -52,7 +54,8 @@ public class Path extends AbstractModel {
     public String toString() {
         return "{" +
                 "destiny=" + destiny +
-                ", transports=" + transports.toString() +
+//                ", transports=" + transports.toString() +
                 '}';
     }
+
 }
