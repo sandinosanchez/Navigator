@@ -50,7 +50,7 @@ public class Path extends AbstractModel {
 
     @Override
     public String toString() {
-        return "Path{" +
+        return "{" +
                 "destiny=" + destiny +
                 ", transports=" + transports.toString() +
                 '}';

@@ -46,12 +46,12 @@ public class Station extends AbstractModel {
     public String toString() {
         String result;
         if (paths == null) {
-            result = "Station{" +
+            result = "{" +
                     "address='" + address + '\'' +
                     ", name='" + name + '\'' +
                     '}';
         } else {
-            result = "Station{" +
+            result = "{" +
                     "address='" + address + '\'' +
                     ", name='" + name + '\'' +
                     ", paths=" + paths.toString() +
