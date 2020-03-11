@@ -89,7 +89,7 @@
                     resultMap="com.solvd.argwinterlab.navigator.db.dao.PathMapper.PathMap"/>
     </resultMap>
     <resultMap id="SimpleStationMap" autoMapping="false" type="Station">
-        <id property="id" column="STATION_ID"/>
+        <id property="id" column="DESTINY_STATION_ID"/>
         <result property="name" column="STATION_NAME"/>
         <result property="address" column="STATION_ADDRESS"/>
     </resultMap>

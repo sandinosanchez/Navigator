@@ -16,4 +16,9 @@ public abstract class AbstractModel {
     public void setId(long id) {
         this.id = id;
     }
+
+	@Override
+	public String toString() {
+		return "AbstractModel [id=" + id + "]";
+	}
 }

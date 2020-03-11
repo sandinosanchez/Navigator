@@ -73,9 +73,9 @@
 
     <resultMap id="TaxiMap" autoMapping="false" type="Taxi">
         <id property="id" column="TAXI_ID"/>
-        <result property="model" column="TAXI_MODEL"/>
+        <!--   <result property="model" column="TAXI_MODEL"/>
         <result property="weight" column="TAXI_WEIGHT"/>
         <result property="name" column="TAXI_NAME"/>
-        <result property="company" column="TAXI_COMPANY"/>
+        <result property="company" column="TAXI_COMPANY"/>-->
     </resultMap>
 </mapper>

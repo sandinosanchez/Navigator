@@ -1,11 +1,15 @@
 package com.solvd.argwinterlab.navigator.db.model;
 
-public abstract class AbstractTransport extends AbstractModel{
+public class AbstractTransport extends AbstractModel{
     private String model;
     private int weight;
     private String name;
 
     public AbstractTransport() {}
+
+    public AbstractTransport(long id) {
+        super(id);
+    }
 
     public AbstractTransport(long id, String model, int weight, String name) {
         super(id);

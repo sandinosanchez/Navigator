@@ -6,12 +6,12 @@
     <properties resource="db.properties"/>
     <typeAliases>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.AbstractTransport" alias="AbstractTransport"/>
-        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.City" alias="City"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Bus" alias="Bus"/>
+        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.City" alias="City"/>
+        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Path" alias="Path"/>
+        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Station" alias="Station"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Taxi" alias="Taxi"/>
         <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Train" alias="Train"/>
-        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Station" alias="Station"/>
-        <typeAlias type="com.solvd.argwinterlab.navigator.db.model.Path" alias="Path"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -25,11 +25,11 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mappers/TrainMapper.xml"/>
+        <!-- <mapper resource="mappers/TrainMapper.xml"/>
         <mapper resource="mappers/BusMapper.xml"/>
-        <mapper resource="mappers/TaxiMapper.xml"/>
+        <mapper resource="mappers/TaxiMapper.xml"/>-->
         <mapper resource="mappers/CityMapper.xml"/>
-        <mapper resource="mappers/StationMapper.xml"/>
-        <mapper resource="mappers/PathMapper.xml"/>
+        <!-- <mapper resource="mappers/StationMapper.xml"/>
+        <mapper resource="mappers/PathMapper.xml"/>-->
     </mappers>
 </configuration>
