@@ -30,7 +30,9 @@
 				<collection property="transports" column="CITY_ID"
 					javaType="ArrayList" ofType="AbstractTransport">
 					<id property="id" column="TRANSPORT_ID" />
-					<!-- <result property="name" column="TRANSPORT_NAME" /> -->
+					<!--  <result property="model" column="TRANSPORT_MODEL" />
+					<result property="weight" column="TRANSPORT_WEIGHT" /> -->
+					<result property="name" column="TRANSPORT_NAME" />
 				</collection>
 
 			</collection>
