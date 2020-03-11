@@ -17,5 +17,4 @@ public interface CityMapper {
 
     void deleteById(long id);
 
-    List<City> findCityCopado();
 }

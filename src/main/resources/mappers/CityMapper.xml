@@ -2,14 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
-<mapper namespace="CityMapper">
+<mapper namespace="com.solvd.argwinterlab.navigator.db.dao.CityMapper">
 
 	<resultMap id="resultCity" type="City">
 		<id property="id" column="CITY_ID" />
 		<result property="name" column="CITY_NAME" />
-
 		<collection property="stations" column="CITY_ID"
 			javaType="ArrayList" ofType="Station">
 			<id property="id" column="STATION_ID" />
@@ -37,50 +34,64 @@
 
 			</collection>
 		</collection>
-
 	</resultMap>
 
+	<sql id="getCityTemplate">
+		<![CDATA[
+			SELECT
+				C.ID AS CITY_ID, C.NAME AS CITY_NAME,
+				S.ID AS STATION_ID, S.NAME AS STATION_NAME, S.ADDRESS AS STATION_ADDRESS,
+				P.PATH_ID AS PATH_ID,
+				-- P.PATH_ORIGIN_ID AS PATH_ORIGIN_ID,
+				P.PATH_DESTINY_ID AS DESTINY_STATION_ID,
+				S2.NAME AS DESTINY_STATION_NAME, S2.ADDRESS AS DESTINY_STATION_ADDRESS,
 
-	<select id="selecCityCopado" resultMap="resultCity">
-	 <![CDATA[
-SELECT
-	C.ID AS CITY_ID, C.NAME AS CITY_NAME,
-    S.ID AS STATION_ID, S.NAME AS STATION_NAME, S.ADDRESS AS STATION_ADDRESS,
-    P.PATH_ID AS PATH_ID, 
-    -- P.PATH_ORIGIN_ID AS PATH_ORIGIN_ID, 
-    P.PATH_DESTINY_ID AS DESTINY_STATION_ID,
-    S2.NAME AS DESTINY_STATION_NAME, S2.ADDRESS AS DESTINY_STATION_ADDRESS,
-    
-     T.ID AS TRANSPORT_ID, T.NAME AS TRANSPORT_NAME, T.TRANSPORT_TYPE AS TRANSPORT_TYPE
-    
-FROM CITIES C
-LEFT JOIN STATIONS S ON S.CITY_ID = C.ID
-LEFT JOIN 
+				 T.ID AS TRANSPORT_ID, T.NAME AS TRANSPORT_NAME, T.TRANSPORT_TYPE AS TRANSPORT_TYPE
 
-(SELECT P4.*
-FROM
-    (SELECT 
-        P3.ID AS PATH_ID,
-		P3.ORIGIN_ID AS PATH_ORIGIN_ID,
-		P3.DESTINY_ID AS PATH_DESTINY_ID
-    FROM
-        PATHS AS P3
-	UNION ALL
-	SELECT 
-		P2.PATH_ID AS PATH_ID,
-		P2.PATH_ORIGIN_ID AS PATH_DESTINY_ID,
-		P2.PATH_DESTINY_ID AS PATH_ORIGIN_ID
-    FROM
-        (SELECT 
-			P1.ID AS PATH_ID,
-            P1.ORIGIN_ID AS PATH_DESTINY_ID,
-            P1.DESTINY_ID AS PATH_ORIGIN_ID
-		FROM
-		PATHS AS P1) P2) P4) P
-	ON P.PATH_ORIGIN_ID = S.ID
-LEFT JOIN PATH_HAS_TRANSPORTS PT ON PT.PATH_ID = P.PATH_ID
-LEFT JOIN TRANSPORTS T ON T.ID = PT.TRANSPORT_ID
-LEFT JOIN STATIONS S2 ON P.PATH_DESTINY_ID = S2.ID;
+			FROM CITIES C
+			LEFT JOIN STATIONS S ON S.CITY_ID = C.ID
+			LEFT JOIN
+
+			(SELECT P4.*
+			FROM
+				(SELECT
+					P3.ID AS PATH_ID,
+					P3.ORIGIN_ID AS PATH_ORIGIN_ID,
+					P3.DESTINY_ID AS PATH_DESTINY_ID
+				FROM
+					PATHS AS P3
+				UNION ALL
+				SELECT
+					P2.PATH_ID AS PATH_ID,
+					P2.PATH_ORIGIN_ID AS PATH_DESTINY_ID,
+					P2.PATH_DESTINY_ID AS PATH_ORIGIN_ID
+				FROM
+					(SELECT
+						P1.ID AS PATH_ID,
+						P1.ORIGIN_ID AS PATH_DESTINY_ID,
+						P1.DESTINY_ID AS PATH_ORIGIN_ID
+					FROM
+					PATHS AS P1) P2) P4) P
+				ON P.PATH_ORIGIN_ID = S.ID
+			LEFT JOIN PATH_has_TRANSPORTS PT ON PT.PATH_ID = P.PATH_ID
+			LEFT JOIN TRANSPORTS T ON T.ID = PT.TRANSPORT_ID
+			LEFT JOIN STATIONS S2 ON P.PATH_DESTINY_ID = S2.ID
+		]]>
+	</sql>
+
+	<select id="findAll" resultMap="resultCity">
+	 	<include refid="getCityTemplate"/>
+	</select>
+
+	<select id="findById" resultMap="resultCity">
+		<include refid="getCityTemplate"/>
+		<![CDATA[
+			WHERE C.ID = #{id}
+		]]>
+	</select>
+	<select id="findByName" resultMap="resultCity">
+		<![CDATA[
+			WHERE C.NAME = #{name}
 		]]>
 	</select>
 
