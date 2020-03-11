@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.CityMapper">
-
+	
 	<resultMap id="resultCity" type="City">
 		<id property="id" column="CITY_ID" />
 		<result property="name" column="CITY_NAME" />
@@ -12,18 +12,15 @@
 			<id property="id" column="STATION_ID" />
 			<result property="name" column="STATION_NAME" />
 			<result property="address" column="STATION_ADDRESS" />
-
 			<collection property="paths" column="CITY_ID"
 				javaType="ArrayList" ofType="Path">
 				<id property="id" column="PATH_ID" />
-
 				<association property="destiny" column="CITY_ID"
 					javaType="Station">
 					<id property="id" column="DESTINY_STATION_ID" />
 					<result property="name" column="STATION_NAME" />
 					<result property="address" column="STATION_ADDRESS" />
 				</association>
-
 				<collection property="transports" column="CITY_ID"
 					javaType="ArrayList" ofType="AbstractTransport">
 					<id property="id" column="TRANSPORT_ID" />
@@ -31,7 +28,6 @@
 					<result property="weight" column="TRANSPORT_WEIGHT" /> -->
 					<result property="name" column="TRANSPORT_NAME" />
 				</collection>
-
 			</collection>
 		</collection>
 	</resultMap>
