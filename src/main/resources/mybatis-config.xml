@@ -25,11 +25,11 @@
         </environment>
     </environments>
     <mappers>
-        <!-- <mapper resource="mappers/TrainMapper.xml"/>
+        <mapper resource="mappers/TrainMapper.xml"/>
         <mapper resource="mappers/BusMapper.xml"/>
-        <mapper resource="mappers/TaxiMapper.xml"/>-->
+        <mapper resource="mappers/TaxiMapper.xml"/>
         <mapper resource="mappers/CityMapper.xml"/>
-        <!-- <mapper resource="mappers/StationMapper.xml"/>
-        <mapper resource="mappers/PathMapper.xml"/>-->
+        <mapper resource="mappers/StationMapper.xml"/>
+        <mapper resource="mappers/PathMapper.xml"/>
     </mappers>
 </configuration>

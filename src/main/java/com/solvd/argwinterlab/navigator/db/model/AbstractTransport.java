@@ -1,6 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.model;
 
-public class AbstractTransport extends AbstractModel{
+public abstract class AbstractTransport extends AbstractModel{
     private String model;
     private int weight;
     private String name;
@@ -44,7 +44,7 @@ public class AbstractTransport extends AbstractModel{
 
     @Override
     public String toString() {
-        return "AbstractTransport{" +
+        return "{" +
                 "model='" + model + '\'' +
                 ", weight=" + weight +
                 ", name='" + name + '\'' +

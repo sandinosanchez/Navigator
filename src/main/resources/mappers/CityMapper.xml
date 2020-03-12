@@ -8,17 +8,17 @@
 		<id property="id" column="CITY_ID" />
 		<result property="name" column="CITY_NAME" />
 		<collection property="stations"
-					javaType="ArrayList"
 					ofType="Station"
-					select="om.solvd.argwinterlab.navigator.db.dao.StationMapper.findAllByCityId"/>
+					column="CITY_ID"
+					select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findAllByCityId"/>
 	</resultMap>
 
 	<sql id="getCityTemplate">
 		<![CDATA[
 			SELECT
-				C.ID AS CITY_ID, C.NAME AS CITY_NAME
-			FROM CITIES C
-
+				C.ID AS CITY_ID,
+				C.NAME AS CITY_NAME
+			FROM nav_db.CITIES C
 		]]>
 	</sql>
 

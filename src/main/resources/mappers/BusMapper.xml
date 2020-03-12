@@ -5,16 +5,16 @@
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.BusMapper">
     <sql id="getBusTemplate">
         <![CDATA[
-            SELECT  TS.ID AS BUS_ID,
-                    TS.WEIGHT AS BUS_WEIGHT,
-                    TS.MODEL AS BUS_MODEL,
-                    TS.NAME AS BUS_NAME,
+            SELECT  TS.ID AS TRANSPORT_ID,
+                    TS.WEIGHT AS TRANSPORT_WEIGHT,
+                    TS.MODEL AS TRANSPORT_MODEL,
+                    TS.NAME AS TRANSPORT_NAME,
                     B.LINE AS BUS_LINE
             FROM
                 nav_db.TRANSPORTS TS
             LEFT JOIN
                 nav_db.BUSES B
-                    ON TS.ID = B.TRANSPORT_ID
+                    ON TS.ID = B.ID
         ]]>
     </sql>
 
@@ -81,11 +81,8 @@
         ]]>
     </delete>
 
-    <resultMap id="BusMap" autoMapping="false" type="Bus">
-        <id property="id" column="BUS_ID"/>
-        <result property="model" column="BUS_MODEL"/>
-        <result property="weight" column="BUS_WEIGHT"/>
-        <result property="wagons" column="BUS_WAGONS"/>
-        <result property="name" column="BUS_NAME"/>
+    <resultMap id="BusMap" autoMapping="false"
+               type="Bus" extends="com.solvd.argwinterlab.navigator.db.dao.PathMapper.AbstractTransportMap">
+        <result property="line" column="BUS_LINE"/>
     </resultMap>
 </mapper>
