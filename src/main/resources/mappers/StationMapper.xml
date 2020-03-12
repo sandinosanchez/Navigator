@@ -7,14 +7,9 @@
         <![CDATA[
             SELECT  S.ID AS STATION_ID,
                     S.NAME AS STATION_NAME,
-                    S.ADDRESS AS STATION_ADDRESS,
-                    P.DESTINY_ID AS STATION_DESTINY_ID,
-                    P.ID AS PATH_ID
+                    S.ADDRESS AS STATION_ADDRESS
             FROM
                 nav_db.STATIONS S
-            LEFT JOIN
-                nav_db.PATHS P
-                    ON S.ID = P.ORIGIN_ID
         ]]>
     </sql>
 
@@ -25,7 +20,7 @@
         ]]>
     </select>
 
-    <select id="findSimpleStationById" resultMap="SimpleStationMap">
+    <select id="findAllByCityId" resultMap="StationMap">
         <![CDATA[
             SELECT  ID AS STATION_ID,
                     NAME AS STATION_NAME,
@@ -86,7 +81,7 @@
         <result property="address" column="STATION_ADDRESS"/>
         <collection property="paths"
                     ofType="Path"
-                    resultMap="com.solvd.argwinterlab.navigator.db.dao.PathMapper.PathMap"/>
+                    select="com.solvd.argwinterlab.navigator.db.dao.PathMapper.findByStationId"/>
     </resultMap>
     <resultMap id="SimpleStationMap" autoMapping="false" type="Station">
         <id property="id" column="DESTINY_STATION_ID"/>

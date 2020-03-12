@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Path extends AbstractModel {
     private Station destiny;
-
     private List<AbstractTransport> transports;
 
     public Path() {}

@@ -22,6 +22,39 @@
                     ON TS.ID = PT.TRANSPORT_ID
         ]]>
     </sql>
+    <sql id="doublePath">
+        <![CDATA[
+        SELECT P.PATH_ID AS PATH_ID, P.PATH_ORIGIN_ID AS PATH_ORIGIN_ID, P.PATH_DESTINY_ID AS PATH_DESTINY_ID
+            FROM
+                (SELECT
+                    P4.*
+                    FROM
+                        (SELECT
+                            P3.ID AS PATH_ID,
+                            P3.ORIGIN_ID AS PATH_ORIGIN_ID,
+                            P3.DESTINY_ID AS PATH_DESTINY_ID
+                        FROM
+                            PATHS AS P3
+                        UNION ALL SELECT
+                            P2.PATH_ID AS PATH_ID,
+                            P2.PATH_ORIGIN_ID AS PATH_DESTINY_ID,
+                            P2.PATH_DESTINY_ID AS PATH_ORIGIN_ID
+                        FROM
+                            (SELECT
+                            P1.ID AS PATH_ID,
+                            P1.ORIGIN_ID AS PATH_DESTINY_ID,
+                            P1.DESTINY_ID AS PATH_ORIGIN_ID
+                            FROM
+                            PATHS AS P1) P2) P4) P
+         ]]>
+    </sql>
+
+    <select id="findAllByStationId">
+        <include refid="doublePath"/>
+        <![CDATA[
+            WHERE P.PATH_ORIGIN_ID = #{id}
+        ]]>
+    </select>
 
     <select id="findById" resultMap="PathMap">
         <include refid="getPathTemplate"/>
@@ -34,6 +67,7 @@
         <include refid="getPathTemplate"/>
     </select>
 
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[INSERT INTO nav_db.PATHS (DESTINY_ID)
                  VALUES (
@@ -41,6 +75,11 @@
                  );
         ]]>
     </insert>
+
+    <select id="getByStationId" resultMap="">
+        SELECT *
+        FROM PATHS WHERE DESTINY_ID = {id}
+    </select>
 
     <update id="updateById">
         <![CDATA[UPDATE

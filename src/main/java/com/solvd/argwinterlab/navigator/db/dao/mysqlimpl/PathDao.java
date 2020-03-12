@@ -16,7 +16,7 @@ public class PathDao extends AbstractDao implements PathMapper {
     private static final Logger LOGGER = Logger.getLogger(PathDao.class);
     private static final String FIND_ALL = "SELECT * FROM PATHS";
     private static final String FIND_BY_ID = "SELECT * FROM PATHS WHERE id = ?";
-    private static final String FIND_ALL_BY_STATION_ID = "SELECT * FROM PATHS WHERE STATION_ID = ?";
+    private static final String FIND_ALL_BY_STATION_ID = "SELECT * FROM PATHS WHERE DESTINY_ID = ?";
     private static final String FIND_BY_ENTITY_ID = "SELECT * FROM PATHS WHERE ENTITY_ID = ?";
     private static final String DELETE_BY_ID = "DELETE FROM PATHS WHERE ID = ?";
     private static final String UPDATE_BY_ID = "UPDATE PATHS SET ? = ? WHERE ID = ?";
