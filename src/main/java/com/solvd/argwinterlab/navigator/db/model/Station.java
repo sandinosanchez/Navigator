@@ -6,16 +6,22 @@ import java.util.List;
 public class Station extends AbstractModel {
     private String address;
     private String name;
-    private List<Path> paths;
+    private List<Path> paths = new ArrayList<>();
 
     public Station() {}
 
     public Station(long id, String address, String name) {
         this.address = address;
         this.name = name;
-        this.paths = new ArrayList<>();
     }
 
+    public Station(String name) {
+        this.name = name;
+    }
+
+    public void addPath(Path path){
+        paths.add(path);
+    }
 
     public String getAddress() {
         return address;

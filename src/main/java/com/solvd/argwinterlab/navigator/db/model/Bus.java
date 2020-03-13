@@ -18,13 +18,17 @@ public class Bus extends AbstractTransport {
         this.line = line;
     }
 
+    public Bus(String name){
+        setName(name);
+    }
+  
     @Override
-	public String getLine() {
+    public String getLine() {
         return line;
     }
 
     @Override
-	public void setLine(String line) {
+	  public void setLine(String line) {
         this.line = line;
     }
 

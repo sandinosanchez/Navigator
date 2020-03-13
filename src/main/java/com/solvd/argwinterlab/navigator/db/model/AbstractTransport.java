@@ -3,6 +3,15 @@ package com.solvd.argwinterlab.navigator.db.model;
 public abstract class AbstractTransport extends AbstractModel{
     private String model;
     private int weight;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name;
 
     public AbstractTransport() {}
@@ -32,14 +41,6 @@ public abstract class AbstractTransport extends AbstractModel{
 
     public void setWeight(int weight) {
         this.weight = weight;
-    }
-
-    public String getLine() {
-        return name;
-    }
-
-    public void setLine(String line) {
-        this.name = line;
     }
 
     @Override

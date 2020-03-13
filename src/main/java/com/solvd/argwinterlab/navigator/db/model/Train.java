@@ -18,6 +18,10 @@ public class Train extends AbstractTransport {
         this.wagons = wagons;
     }
 
+    public Train(String name){
+            setName(name);
+    }
+
     public int getWagons() {
         return wagons;
     }
@@ -29,7 +33,7 @@ public class Train extends AbstractTransport {
     @Override
     public String toString() {
         return super.toString() +
-                ", wagons=" + wagons +
-                '}';
+                "\nwagons=" + wagons +
+                "\n}";
     }
 }

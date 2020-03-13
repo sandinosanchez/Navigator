@@ -66,7 +66,7 @@ public class PathSearch {
 		if (Objects.nonNull(resultMap)) {
 			Station actualStation = destiny;
 			result.add(Result.initResult(actualStation, null));
-			while (actualStation != null) {
+			while (resultMap.get(actualStation) != null) {
 				result.add(0, resultMap.get(actualStation));
 				actualStation = resultMap.get(actualStation).getOrigin();
 			}

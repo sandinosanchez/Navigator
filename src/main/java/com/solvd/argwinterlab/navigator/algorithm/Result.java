@@ -10,6 +10,8 @@ public class Result {
     private Station origin;
     private AbstractTransport transport;
 
+    public Result(){}
+
     public Result(Station origin) {
         this.origin = origin;
     }
@@ -39,5 +41,12 @@ public class Result {
 
     public static Result initResult(Station origin, AbstractTransport transport) {
         return new Result(origin, transport);
+    }
+
+    @Override
+    public String toString(){
+        return transport!=null ?
+                "on " + origin.getName() + " take " + transport.getName()  + "\n":
+                "on destiny: " + origin.getName();
     }
 }
