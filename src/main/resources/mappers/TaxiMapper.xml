@@ -32,11 +32,12 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             BEGIN;
-                 INSERT INTO nav_db.TRANSPORTS (WEIGHT, MODEL, NAME)
+                 INSERT INTO nav_db.TRANSPORTS (WEIGHT, MODEL, NAME, TRANSPORT_TYPE)
                  VALUES (
-                     #{name},
                      #{weight},
-                     #{model}
+                     #{model},
+                     #{name},
+                     #{transportType}
                  );
                  INSERT INTO nav_db.TAXIS (ID, COMPANY)
                  VALUES (
@@ -64,7 +65,7 @@
         ]]>
     </update>
 
-    <delete id="delete">
+    <delete id="deleteById">
         <![CDATA[
             DELETE FROM nav_db.TRANSPORT_ENTITY
             WHERE ID = #{id}

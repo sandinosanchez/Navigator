@@ -1,0 +1,669 @@
+[
+  {
+    "name": "NYC",
+    "stations": [
+      {
+        "address": "address a",
+        "name": "A",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address b",
+              "name": "B",
+              "id": 2
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 1
+          },
+          {
+            "destiny": {
+              "address": "address h",
+              "name": "H",
+              "id": 8
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 2
+          }
+        ],
+        "id": 1
+      },
+      {
+        "address": "address b",
+        "name": "B",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address c",
+              "name": "C",
+              "id": 3
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 3
+          },
+          {
+            "destiny": {
+              "address": "address a",
+              "name": "A",
+              "id": 1
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 1
+          }
+        ],
+        "id": 2
+      },
+      {
+        "address": "address c",
+        "name": "C",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address d",
+              "name": "D",
+              "id": 4
+            },
+            "transports": [
+              {
+                "wagons": 7,
+                "model": "",
+                "weight": 0,
+                "name": "ORANGE TRAIN",
+                "id": 2
+              }
+            ],
+            "id": 4
+          },
+          {
+            "destiny": {
+              "address": "address d",
+              "name": "D",
+              "id": 4
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 4
+          },
+          {
+            "destiny": {
+              "address": "address b",
+              "name": "B",
+              "id": 2
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 3
+          }
+        ],
+        "id": 3
+      },
+      {
+        "address": "address d",
+        "name": "D",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address e",
+              "name": "E",
+              "id": 5
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 5
+          },
+          {
+            "destiny": {
+              "address": "address i",
+              "name": "I",
+              "id": 9
+            },
+            "transports": [
+              {
+                "wagons": 7,
+                "model": "",
+                "weight": 0,
+                "name": "ORANGE TRAIN",
+                "id": 2
+              }
+            ],
+            "id": 6
+          },
+          {
+            "destiny": {
+              "address": "address i",
+              "name": "I",
+              "id": 9
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 6
+          },
+          {
+            "destiny": {
+              "address": "address c",
+              "name": "C",
+              "id": 3
+            },
+            "transports": [
+              {
+                "wagons": 7,
+                "model": "",
+                "weight": 0,
+                "name": "ORANGE TRAIN",
+                "id": 2
+              }
+            ],
+            "id": 4
+          },
+          {
+            "destiny": {
+              "address": "address c",
+              "name": "C",
+              "id": 3
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 4
+          }
+        ],
+        "id": 4
+      },
+      {
+        "address": "address e",
+        "name": "E",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address f",
+              "name": "F",
+              "id": 6
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 7
+          },
+          {
+            "destiny": {
+              "address": "address h",
+              "name": "H",
+              "id": 8
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 8
+          },
+          {
+            "destiny": {
+              "address": "address d",
+              "name": "D",
+              "id": 4
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 5
+          }
+        ],
+        "id": 5
+      },
+      {
+        "address": "address f",
+        "name": "F",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address g",
+              "name": "G",
+              "id": 7
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 9
+          },
+          {
+            "destiny": {
+              "address": "address h",
+              "name": "H",
+              "id": 8
+            },
+            "transports": [
+              {
+                "line": "LINE 5",
+                "model": "",
+                "weight": 0,
+                "name": "RED BUS",
+                "id": 5
+              }
+            ],
+            "id": 10
+          },
+          {
+            "destiny": {
+              "address": "address e",
+              "name": "E",
+              "id": 5
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 7
+          }
+        ],
+        "id": 6
+      },
+      {
+        "address": "address g",
+        "name": "G",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address h",
+              "name": "H",
+              "id": 8
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 11
+          },
+          {
+            "destiny": {
+              "address": "address f",
+              "name": "F",
+              "id": 6
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 9
+          }
+        ],
+        "id": 7
+      },
+      {
+        "address": "address h",
+        "name": "H",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address a",
+              "name": "A",
+              "id": 1
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 2
+          },
+          {
+            "destiny": {
+              "address": "address e",
+              "name": "E",
+              "id": 5
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 8
+          },
+          {
+            "destiny": {
+              "address": "address f",
+              "name": "F",
+              "id": 6
+            },
+            "transports": [
+              {
+                "line": "LINE 5",
+                "model": "",
+                "weight": 0,
+                "name": "RED BUS",
+                "id": 5
+              }
+            ],
+            "id": 10
+          },
+          {
+            "destiny": {
+              "address": "address g",
+              "name": "G",
+              "id": 7
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 11
+          }
+        ],
+        "id": 8
+      }
+    ],
+    "id": 1
+  },
+  {
+    "name": "New Jersey",
+    "stations": [
+      {
+        "address": "address i",
+        "name": "I",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address j",
+              "name": "J",
+              "id": 10
+            },
+            "transports": [
+              {
+                "line": "LINE 6",
+                "model": "",
+                "weight": 0,
+                "name": "PINK BUS",
+                "id": 6
+              }
+            ],
+            "id": 12
+          },
+          {
+            "destiny": {
+              "address": "address k",
+              "name": "K",
+              "id": 11
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 13
+          },
+          {
+            "destiny": {
+              "address": "address k",
+              "name": "K",
+              "id": 11
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 13
+          },
+          {
+            "destiny": {
+              "address": "address d",
+              "name": "D",
+              "id": 4
+            },
+            "transports": [
+              {
+                "wagons": 7,
+                "model": "",
+                "weight": 0,
+                "name": "ORANGE TRAIN",
+                "id": 2
+              }
+            ],
+            "id": 6
+          },
+          {
+            "destiny": {
+              "address": "address d",
+              "name": "D",
+              "id": 4
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 6
+          }
+        ],
+        "id": 9
+      },
+      {
+        "address": "address j",
+        "name": "J",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address k",
+              "name": "K",
+              "id": 11
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "BROWN TRAIN",
+                "id": 3
+              }
+            ],
+            "id": 14
+          },
+          {
+            "destiny": {
+              "address": "address i",
+              "name": "I",
+              "id": 9
+            },
+            "transports": [
+              {
+                "line": "LINE 6",
+                "model": "",
+                "weight": 0,
+                "name": "PINK BUS",
+                "id": 6
+              }
+            ],
+            "id": 12
+          }
+        ],
+        "id": 10
+      },
+      {
+        "address": "address k",
+        "name": "K",
+        "paths": [
+          {
+            "destiny": {
+              "address": "address i",
+              "name": "I",
+              "id": 9
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "GREEN TRAIN",
+                "id": 1
+              }
+            ],
+            "id": 13
+          },
+          {
+            "destiny": {
+              "address": "address i",
+              "name": "I",
+              "id": 9
+            },
+            "transports": [
+              {
+                "line": "LINE 4",
+                "model": "",
+                "weight": 0,
+                "name": "BLUE BUS",
+                "id": 4
+              }
+            ],
+            "id": 13
+          },
+          {
+            "destiny": {
+              "address": "address j",
+              "name": "J",
+              "id": 10
+            },
+            "transports": [
+              {
+                "wagons": 8,
+                "model": "",
+                "weight": 0,
+                "name": "BROWN TRAIN",
+                "id": 3
+              }
+            ],
+            "id": 14
+          }
+        ],
+        "id": 11
+      }
+    ],
+    "id": 2
+  }
+]

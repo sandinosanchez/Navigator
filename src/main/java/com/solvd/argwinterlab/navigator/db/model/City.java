@@ -3,7 +3,7 @@ package com.solvd.argwinterlab.navigator.db.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class City extends AbstractModel{
+public class City extends AbstractModel {
     private String name;
     private List<Station> stations;
 

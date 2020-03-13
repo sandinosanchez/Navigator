@@ -6,6 +6,10 @@ import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.PathDao;
 import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.TaxiDao;
 import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.TrainDao;
 import com.solvd.argwinterlab.navigator.db.model.Path;
+import com.solvd.argwinterlab.navigator.db.utils.ConnectionFactory;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 public class PathService {
     private TaxiMapper taxiMapper;
@@ -20,7 +24,12 @@ public class PathService {
         this.pathMapper = new PathDao();
     }
 
-
+    public static List<Path> findAllByStationId(long id) {
+        try (SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession(true)) {
+            PathMapper pathMapper = session.getMapper(PathMapper.class);
+            return pathMapper.findAllByStationId(id);
+        }
+    }
 
     public TaxiMapper getTaxiMapper() {
         return taxiMapper;

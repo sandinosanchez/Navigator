@@ -14,6 +14,8 @@ public class Result {
         this.origin = origin;
     }
 
+    public Result(){}
+
     public Result(Station origin, AbstractTransport transport) {
         this.origin = origin;
         this.transport = transport;

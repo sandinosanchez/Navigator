@@ -46,39 +46,6 @@
                         ON PT.TRANSPORT_ID = T.ID
         ]]>
     </sql>
-    <sql id="doublePath">
-        <![CDATA[
-        SELECT  P.PATH_ID AS PATH_ID,
-                P.PATH_ORIGIN_ID AS PATH_ORIGIN_ID,
-                P.PATH_DESTINY_ID AS PATH_DESTINY_ID,
-                S.ID AS DESTINY_STATION_ID,
-                S.NAME AS DESTINY_STATION_NAME,
-                S.ADDRESS AS DESTINY_STATION_ADDRESS
-        FROM
-            (SELECT  P4.*
-             FROM
-                (SELECT  P3.ID AS PATH_ID,
-                         P3.ORIGIN_ID AS PATH_ORIGIN_ID,
-                         P3.DESTINY_ID AS PATH_DESTINY_ID
-                 FROM
-                     PATHS AS P3
-                 UNION ALL SELECT
-                     P2.PATH_ID AS PATH_ID,
-                     P2.PATH_ORIGIN_ID AS PATH_DESTINY_ID,
-                     P2.PATH_DESTINY_ID AS PATH_ORIGIN_ID
-                 FROM
-                     (SELECT P1.ID AS PATH_ID,
-                             P1.ORIGIN_ID AS PATH_DESTINY_ID,
-                             P1.DESTINY_ID AS PATH_ORIGIN_ID
-                      FROM
-                          PATHS AS P1)
-                 P2)
-             P4) P
-        LEFT JOIN
-            nav_db.STATIONS S
-                ON P.PATH_DESTINY_ID = S.ID
-         ]]>
-    </sql>
 
     <select id="findAllByStationId" resultMap="PathMap">
         <include refid="pathJoinTransports"/>
@@ -100,31 +67,24 @@
 
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        <![CDATA[INSERT INTO nav_db.PATHS (DESTINY_ID)
+        <![CDATA[INSERT INTO nav_db.PATHS (ORIGIN_IF, DESTINY_ID)
                  VALUES (
-                     #{destinyId}
+                    #{originId},
+                    #{destinyId}
                  );
         ]]>
     </insert>
 
-    <select id="getByStationId" resultMap="PathMap">
-        SELECT *
-        FROM PATHS WHERE DESTINY_ID = {id}
-    </select>
-
     <update id="updateById">
         <![CDATA[UPDATE
-                    nav_db.TRANSPORTS
+                    nav_db.PATHS
         ]]>
         <set>
-            <if test="weight != null">
-                <![CDATA[ WEIGHT = #{weight}, ]]>
+            <if test="originId != null">
+                <![CDATA[ ORIGIN_ID = #{originId}, ]]>
             </if>
             <if test="model != null">
-                <![CDATA[ MODEL = #{model}, ]]>
-            </if>
-            <if test="name != null">
-                <![CDATA[ NAME = #{name} ]]>
+                <![CDATA[ DESTINY_ID = #{destinyId}, ]]>
             </if>
         </set>
         <![CDATA[
@@ -134,7 +94,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM nav_db.TRANSPORTS
+            DELETE FROM nav_db.PATHS
             WHERE ID = #{id}
         ]]>
     </delete>
@@ -165,6 +125,7 @@
             </case>
         </discriminator>
     </resultMap>
+
     <resultMap id="AbstractTransportMap" type="AbstractTransport" autoMapping="false">
         <id property="id" column="TRANSPORT_ID"/>
         <result property="name" column="TRANSPORT_NAME"/>

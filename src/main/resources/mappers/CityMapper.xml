@@ -3,15 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.CityMapper">
-	
-	<resultMap id="resultCity" type="City">
-		<id property="id" column="CITY_ID" />
-		<result property="name" column="CITY_NAME" />
-		<collection property="stations"
-					ofType="Station"
-					column="CITY_ID"
-					select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findAllByCityId"/>
-	</resultMap>
 
 	<sql id="getCityTemplate">
 		<![CDATA[
@@ -41,5 +32,35 @@
     <insert id="save" keyProperty="id" useGeneratedKeys="true" flushCache="false">
         INSERT INTO nav_db.CITIES (NAME) VALUES (#{name})
     </insert>
+
+	<update id="updateById">
+		<![CDATA[UPDATE
+                    nav_db.CITIES
+        ]]>
+		<set>
+			<if test="name != null">
+				<![CDATA[ WEIGHT = #{name} ]]>
+			</if>
+		</set>
+		<![CDATA[
+            WHERE ID = #{id}
+        ]]>
+	</update>
+
+	<delete id="deleteById">
+		<![CDATA[
+            DELETE FROM nav_db.CITIES
+            WHERE ID = #{id}
+        ]]>
+	</delete>
+
+	<resultMap id="resultCity" type="City">
+		<id property="id" column="CITY_ID" />
+		<result property="name" column="CITY_NAME" />
+		<collection property="stations"
+					ofType="Station"
+					column="CITY_ID"
+					select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findAllByCityId"/>
+	</resultMap>
 
 </mapper>

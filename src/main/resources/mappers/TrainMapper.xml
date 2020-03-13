@@ -67,7 +67,7 @@
         ]]>
     </update>
 
-    <delete id="delete">
+    <delete id="deleteById">
         <![CDATA[
             DELETE FROM nav_db.TRANSPORTS
             WHERE ID = #{id}

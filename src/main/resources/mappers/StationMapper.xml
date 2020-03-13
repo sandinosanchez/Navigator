@@ -91,7 +91,7 @@
                     select="com.solvd.argwinterlab.navigator.db.dao.PathMapper.findAllByStationId"/>
     </resultMap>
     <resultMap id="SimpleStationMap" autoMapping="false" type="Station">
-        <id property="id" column="DESTINY_STATION_ID"/>
+        <id property="id" column="STATION_DESTINY_ID"/>
         <result property="name" column="DESTINY_STATION_NAME"/>
         <result property="address" column="DESTINY_STATION_ADDRESS"/>
     </resultMap>
