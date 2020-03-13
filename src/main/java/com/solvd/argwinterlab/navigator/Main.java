@@ -27,14 +27,14 @@ public class Main {
             CityMapper cityMapper = session.getMapper(CityMapper.class);
 
             Station station1 = stationMapper.findById(1);
-            Station station2 = stationMapper.findById(3);
+            Station station2 = stationMapper.findById(10);
 
             try (Writer writer = new FileWriter("output.json")) {
                 Gson gson = new GsonBuilder()
                         .setPrettyPrinting()
                         .create();
-                //List<Result> resultList = PathSearch.getPath(station1, station2, session);
-                gson.toJson(cityMapper.findAll(), writer);
+                List<Result> resultList = PathSearch.getPath(station1, station2, session);
+                gson.toJson(resultList, writer);
             } catch (IOException e) {
                 LOGGER.error(e);
             }

@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 public class PathSearch {
 
 	private static Map<Station, Result> shortestPath(Station originStation, Station destinyStation, SqlSession session) {
-		List<Station> visited = new ArrayList<>();
+		Set<Station> visited = new HashSet<>();
 		Map<Station, Result> result = new HashMap<>();
 		List<Station> toVisit = new ArrayList<>();
 
@@ -45,9 +45,7 @@ public class PathSearch {
 			visited.add(currentStation);
 			toVisit.remove(0);
 		}
-		HashMap<Station , Result> map = new HashMap<>();
-		map.put(new Station(), new Result());
-		return map;
+		return null;
 	}
 
 	private static PathMapper initPathMapperSession(SqlSession session) {
@@ -62,6 +60,7 @@ public class PathSearch {
 		}
 
 		Map <Station, Result> resultMap = shortestPath(origin, destiny, session);
+
 
 		if (Objects.nonNull(resultMap)) {
 			Station actualStation = destiny;
