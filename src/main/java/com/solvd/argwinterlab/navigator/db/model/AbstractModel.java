@@ -21,4 +21,10 @@ public abstract class AbstractModel {
 	public String toString() {
 		return "AbstractModel [id=" + id + "]";
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        AbstractModel o = (AbstractModel) obj;
+        return id==o.id;
+    }
 }

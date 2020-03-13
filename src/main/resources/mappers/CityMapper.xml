@@ -24,6 +24,7 @@
 		]]>
 	</select>
 	<select id="findByName" resultMap="resultCity">
+		<include refid="getCityTemplate"/>
 		<![CDATA[
 			WHERE C.NAME = #{name}
 		]]>

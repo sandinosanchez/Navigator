@@ -5,14 +5,17 @@ import java.util.List;
 
 public class City extends AbstractModel {
     private String name;
-    private List<Station> stations;
+    private List<Station> stations = new ArrayList<>();
 
     public City() {}
 
     public City(long id, String name) {
         super(id);
         this.name = name;
-        this.stations = new ArrayList<>();
+    }
+
+    public City(String name) {
+        this.name = name;
     }
 
     public String getName() {
@@ -38,5 +41,16 @@ public class City extends AbstractModel {
                 "name='" + name + '\'' +
                 ", stations=" + stations.toString() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean equal = super.equals(obj);
+        City city = (City) obj;
+        if (!name.equals(city.name))
+            equal = false;
+        if (!stations.equals(city.stations))
+            equal=false;
+        return equal;
     }
 }
