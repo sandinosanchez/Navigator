@@ -7,13 +7,16 @@ import java.util.Optional;
 public class City extends AbstractModel {
     private String name;
     private List<Station> stations = new ArrayList<>();
-    ;
 
     public City() {
     }
 
     public City(long id, String name) {
         super(id);
+        this.name = name;
+    }
+
+    public City(String name) {
         this.name = name;
     }
 
@@ -75,5 +78,16 @@ public class City extends AbstractModel {
                 "\nname='" + name + "\'," +
                 "\nstations=" + stations.toString() + "," +
                 "\n}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean equal = super.equals(obj);
+        City city = (City) obj;
+        if (!name.equals(city.name))
+            equal = false;
+        if (!stations.equals(city.stations))
+            equal=false;
+        return equal;
     }
 }
