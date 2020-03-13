@@ -21,14 +21,12 @@ public class Bus extends AbstractTransport {
     public Bus(String name){
         setName(name);
     }
-  
-    @Override
+
     public String getLine() {
         return line;
     }
 
-    @Override
-	  public void setLine(String line) {
+    public void setLine(String line) {
         this.line = line;
     }
 

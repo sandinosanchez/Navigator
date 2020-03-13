@@ -10,6 +10,7 @@
             "destiny": {
               "address": "address b",
               "name": "B",
+              "paths": [],
               "id": 2
             },
             "transports": [
@@ -27,6 +28,7 @@
             "destiny": {
               "address": "address h",
               "name": "H",
+              "paths": [],
               "id": 8
             },
             "transports": [
@@ -51,6 +53,7 @@
             "destiny": {
               "address": "address c",
               "name": "C",
+              "paths": [],
               "id": 3
             },
             "transports": [
@@ -68,6 +71,7 @@
             "destiny": {
               "address": "address a",
               "name": "A",
+              "paths": [],
               "id": 1
             },
             "transports": [
@@ -92,6 +96,7 @@
             "destiny": {
               "address": "address d",
               "name": "D",
+              "paths": [],
               "id": 4
             },
             "transports": [
@@ -109,6 +114,7 @@
             "destiny": {
               "address": "address d",
               "name": "D",
+              "paths": [],
               "id": 4
             },
             "transports": [
@@ -126,6 +132,7 @@
             "destiny": {
               "address": "address b",
               "name": "B",
+              "paths": [],
               "id": 2
             },
             "transports": [
@@ -150,6 +157,7 @@
             "destiny": {
               "address": "address e",
               "name": "E",
+              "paths": [],
               "id": 5
             },
             "transports": [
@@ -167,6 +175,7 @@
             "destiny": {
               "address": "address i",
               "name": "I",
+              "paths": [],
               "id": 9
             },
             "transports": [
@@ -184,6 +193,7 @@
             "destiny": {
               "address": "address i",
               "name": "I",
+              "paths": [],
               "id": 9
             },
             "transports": [
@@ -201,6 +211,7 @@
             "destiny": {
               "address": "address c",
               "name": "C",
+              "paths": [],
               "id": 3
             },
             "transports": [
@@ -218,6 +229,7 @@
             "destiny": {
               "address": "address c",
               "name": "C",
+              "paths": [],
               "id": 3
             },
             "transports": [
@@ -242,6 +254,7 @@
             "destiny": {
               "address": "address f",
               "name": "F",
+              "paths": [],
               "id": 6
             },
             "transports": [
@@ -259,6 +272,7 @@
             "destiny": {
               "address": "address h",
               "name": "H",
+              "paths": [],
               "id": 8
             },
             "transports": [
@@ -276,6 +290,7 @@
             "destiny": {
               "address": "address d",
               "name": "D",
+              "paths": [],
               "id": 4
             },
             "transports": [
@@ -300,6 +315,7 @@
             "destiny": {
               "address": "address g",
               "name": "G",
+              "paths": [],
               "id": 7
             },
             "transports": [
@@ -317,6 +333,7 @@
             "destiny": {
               "address": "address h",
               "name": "H",
+              "paths": [],
               "id": 8
             },
             "transports": [
@@ -334,6 +351,7 @@
             "destiny": {
               "address": "address e",
               "name": "E",
+              "paths": [],
               "id": 5
             },
             "transports": [
@@ -358,6 +376,7 @@
             "destiny": {
               "address": "address h",
               "name": "H",
+              "paths": [],
               "id": 8
             },
             "transports": [
@@ -375,6 +394,7 @@
             "destiny": {
               "address": "address f",
               "name": "F",
+              "paths": [],
               "id": 6
             },
             "transports": [
@@ -399,6 +419,7 @@
             "destiny": {
               "address": "address a",
               "name": "A",
+              "paths": [],
               "id": 1
             },
             "transports": [
@@ -416,6 +437,7 @@
             "destiny": {
               "address": "address e",
               "name": "E",
+              "paths": [],
               "id": 5
             },
             "transports": [
@@ -433,6 +455,7 @@
             "destiny": {
               "address": "address f",
               "name": "F",
+              "paths": [],
               "id": 6
             },
             "transports": [
@@ -450,6 +473,7 @@
             "destiny": {
               "address": "address g",
               "name": "G",
+              "paths": [],
               "id": 7
             },
             "transports": [
@@ -480,6 +504,7 @@
             "destiny": {
               "address": "address j",
               "name": "J",
+              "paths": [],
               "id": 10
             },
             "transports": [
@@ -497,6 +522,7 @@
             "destiny": {
               "address": "address k",
               "name": "K",
+              "paths": [],
               "id": 11
             },
             "transports": [
@@ -514,6 +540,7 @@
             "destiny": {
               "address": "address k",
               "name": "K",
+              "paths": [],
               "id": 11
             },
             "transports": [
@@ -531,6 +558,7 @@
             "destiny": {
               "address": "address d",
               "name": "D",
+              "paths": [],
               "id": 4
             },
             "transports": [
@@ -548,6 +576,7 @@
             "destiny": {
               "address": "address d",
               "name": "D",
+              "paths": [],
               "id": 4
             },
             "transports": [
@@ -572,6 +601,7 @@
             "destiny": {
               "address": "address k",
               "name": "K",
+              "paths": [],
               "id": 11
             },
             "transports": [
@@ -589,6 +619,7 @@
             "destiny": {
               "address": "address i",
               "name": "I",
+              "paths": [],
               "id": 9
             },
             "transports": [
@@ -613,6 +644,7 @@
             "destiny": {
               "address": "address i",
               "name": "I",
+              "paths": [],
               "id": 9
             },
             "transports": [
@@ -630,6 +662,7 @@
             "destiny": {
               "address": "address i",
               "name": "I",
+              "paths": [],
               "id": 9
             },
             "transports": [
@@ -647,6 +680,7 @@
             "destiny": {
               "address": "address j",
               "name": "J",
+              "paths": [],
               "id": 10
             },
             "transports": [

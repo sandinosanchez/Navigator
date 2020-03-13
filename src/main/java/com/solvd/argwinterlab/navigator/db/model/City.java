@@ -7,10 +7,8 @@ import java.util.Optional;
 public class City extends AbstractModel {
     private String name;
     private List<Station> stations = new ArrayList<>();
-    ;
 
-    public City() {
-    }
+    public City() {}
 
     public City(long id, String name) {
         super(id);
