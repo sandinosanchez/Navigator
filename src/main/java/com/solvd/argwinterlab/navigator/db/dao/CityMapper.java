@@ -1,8 +1,8 @@
 package com.solvd.argwinterlab.navigator.db.dao;
 
-import com.solvd.argwinterlab.navigator.db.model.City;
-
 import java.util.List;
+
+import com.solvd.argwinterlab.navigator.db.model.City;
 
 public interface CityMapper {
     City findById(long id);
@@ -16,4 +16,5 @@ public interface CityMapper {
     void save(City city);
 
     void deleteById(long id);
+
 }

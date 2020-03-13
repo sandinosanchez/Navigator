@@ -17,6 +17,7 @@ public class Path extends AbstractModel {
     public Path(long id, Station destiny) {
         super(id);
         this.destiny = destiny;
+
         this.transports = new ArrayList<>();
     }
 
@@ -56,9 +57,10 @@ public class Path extends AbstractModel {
 
     @Override
     public String toString() {
-        return  "\nPath{" +
-                "\ndestiny=" + destiny.getName() +
-                "\n, transports=" + transports.toString() +
-                "\n}";
+        return "{" +
+                "destiny=" + destiny +
+                ", transports=" + transports.toString() +
+                '}';
     }
+
 }

@@ -5,16 +5,16 @@
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.TaxiMapper">
     <sql id="getTaxiTemplate">
         <![CDATA[
-            SELECT  TS.ID AS TAXI_ID,
-                    TS.WEIGHT AS TAXI_WEIGHT,
-                    TS.MODEL AS TAXI_MODEL,
-                    TS.NAME AS TAXI_NAME,
-                    T.COMPANY AS TAXI_WAGONS
+            SELECT  TS.ID AS TRANSPORT_ID,
+                    TS.WEIGHT AS TRANSPORT_WEIGHT,
+                    TS.MODEL AS TRANSPORT_MODEL,
+                    TS.NAME AS TRANSPORT_NAME,
+                    T.COMPANY AS TAXI_COMPANY
             FROM
                 nav_db.TRANSPORTS TS
             LEFT JOIN
                 nav_db.TAXIS T
-                    ON TS.ID = T.TRANSPORT_ID
+                    ON TS.ID = T.ID
         ]]>
     </sql>
 
@@ -32,11 +32,12 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             BEGIN;
-                 INSERT INTO nav_db.TRANSPORTS (WEIGHT, MODEL, NAME)
+                 INSERT INTO nav_db.TRANSPORTS (WEIGHT, MODEL, NAME, TRANSPORT_TYPE)
                  VALUES (
-                     #{name},
                      #{weight},
-                     #{model}
+                     #{model},
+                     #{name},
+                     #{transportType}
                  );
                  INSERT INTO nav_db.TAXIS (ID, COMPANY)
                  VALUES (
@@ -64,18 +65,15 @@
         ]]>
     </update>
 
-    <delete id="delete">
+    <delete id="deleteById">
         <![CDATA[
             DELETE FROM nav_db.TRANSPORT_ENTITY
             WHERE ID = #{id}
         ]]>
     </delete>
 
-    <resultMap id="TaxiMap" autoMapping="false" type="Taxi">
-        <id property="id" column="TAXI_ID"/>
-        <result property="model" column="TAXI_MODEL"/>
-        <result property="weight" column="TAXI_WEIGHT"/>
-        <result property="name" column="TAXI_NAME"/>
+    <resultMap id="TaxiMap" autoMapping="false" type="Taxi"
+               extends="com.solvd.argwinterlab.navigator.db.dao.PathMapper.AbstractTransportMap">
         <result property="company" column="TAXI_COMPANY"/>
     </resultMap>
 </mapper>

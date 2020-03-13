@@ -64,7 +64,6 @@ public class CityDao extends AbstractDao implements CityMapper {
             LOGGER.error(e);
         }
     }
-
     @Override
     public void updateById(City city) {
         try (ClosableEntity ce = new ClosableEntity(getConnection())) {

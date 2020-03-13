@@ -1,68 +1,43 @@
 package com.solvd.argwinterlab.navigator;
 
-import static com.solvd.argwinterlab.navigator.algorithm.PathSearch.getPath;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.solvd.argwinterlab.navigator.algorithm.PathSearch;
 import com.solvd.argwinterlab.navigator.algorithm.Result;
 import com.solvd.argwinterlab.navigator.db.dao.CityMapper;
-import com.solvd.argwinterlab.navigator.db.model.*;
+import com.solvd.argwinterlab.navigator.db.dao.StationMapper;
+import com.solvd.argwinterlab.navigator.db.model.City;
+import com.solvd.argwinterlab.navigator.db.model.Station;
 import com.solvd.argwinterlab.navigator.db.utils.ConnectionFactory;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 public class Main {
+	private static final Logger LOGGER = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try (SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession(true)) {
+            StationMapper stationMapper = session.getMapper(StationMapper.class);
             CityMapper cityMapper = session.getMapper(CityMapper.class);
 
-            City cityA = new City();
-            City cityB = new City();
-            cityA.setName("A Land");
-            cityB.setName("B Land");
+            Station station1 = stationMapper.findById(1);
+            Station station2 = stationMapper.findById(3);
 
-            Train tr1 = new Train("Train 1");
-            Train tr2 = new Train("Train 2");
-            Train tr3 = new Train("Train 3");
-
-            Bus bus1 = new Bus("Bus 1");
-            Bus bus2 = new Bus("Bus 2");
-            Bus bus3 = new Bus("Bus 3");
-
-            cityA.addStation(new Station("A"));
-            cityA.addStation(new Station("B"));
-            cityA.addStation(new Station("C"));
-            cityA.addStation(new Station("D"));
-            cityA.addStation(new Station("E"));
-            cityA.addStation(new Station("F"));
-            cityA.addStation(new Station("H"));
-            cityA.addStation(new Station("G"));
-
-            cityB.addStation(new Station("I"));
-            cityB.addStation(new Station("J"));
-            cityB.addStation(new Station("K"));
-
-            cityA.addPath("A","B",tr1);
-            cityA.addPath("B","C",tr1);
-            cityA.addPath("C","D",tr2);
-            cityA.addPath("C","D",bus1);
-            cityA.addPath("D","E",tr1);
-            cityA.addPath("E","F",bus1);
-            cityA.addPath("E","H",tr1);
-            cityA.addPath("F","H",bus2);
-            cityA.addPath("F","G",bus1);
-            cityA.addPath("G","H",bus1);
-            cityA.addPath("H","A",tr1);
-
-            System.out.println(cityA);
-            //System.out.println(cityB);
-
-
-            List<Result> result = getPath(
-                    cityA.getStations().stream().filter(station -> station.getName().equals("A")).findFirst().get(),
-                    cityA.getStations().stream().filter(station -> station.getName().equals("D")).findFirst().get()
-            );
-            System.out.println(result.toString());
+            try (Writer writer = new FileWriter("output.json")) {
+                Gson gson = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .create();
+                //List<Result> resultList = PathSearch.getPath(station1, station2, session);
+                gson.toJson(cityMapper.findAll(), writer);
+            } catch (IOException e) {
+                LOGGER.error(e);
+            }
         }
     }
 }

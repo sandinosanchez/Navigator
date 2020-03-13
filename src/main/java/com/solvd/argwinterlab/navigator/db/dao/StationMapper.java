@@ -10,6 +10,8 @@ public interface StationMapper {
 
     Station findByName(String name);
 
+    Station findSimpleStationById(long id);
+
     List<Station> findAllByCityId(long id);
 
     List<Station> findAll();

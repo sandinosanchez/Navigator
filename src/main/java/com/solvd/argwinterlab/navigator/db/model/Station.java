@@ -2,7 +2,6 @@ package com.solvd.argwinterlab.navigator.db.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Station extends AbstractModel {
     private String address;
@@ -51,10 +50,19 @@ public class Station extends AbstractModel {
 
     @Override
     public String toString() {
-        return  "\nStation{" +
-                "\naddress='" + address + "\'," +
-                "\nname='" + name + "\'," +
-                "\npaths=" + paths.toString() +
-                "\n}";
+        String result;
+        if (paths == null) {
+            result = "{" +
+                    "address='" + address + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        } else {
+            result = "{" +
+                    "address='" + address + '\'' +
+                    ", name='" + name + '\'' +
+                    ", paths=" + paths.toString() +
+                    '}';
+        }
+        return result;
     }
 }

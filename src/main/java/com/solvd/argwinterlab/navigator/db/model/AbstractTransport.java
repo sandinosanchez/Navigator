@@ -16,6 +16,10 @@ public abstract class AbstractTransport extends AbstractModel{
 
     public AbstractTransport() {}
 
+    public AbstractTransport(long id) {
+        super(id);
+    }
+
     public AbstractTransport(long id, String model, int weight, String name) {
         super(id);
         this.model = model;
@@ -41,10 +45,10 @@ public abstract class AbstractTransport extends AbstractModel{
 
     @Override
     public String toString() {
-        return  "\nAbstractTransport{" +
-                "\nmodel='" + model + "'," +
-                "\nweight=" + weight + "," +
-                "\nname='" + name + '\'' +
-                "\n}";
+        return "{" +
+                "model='" + model + '\'' +
+                ", weight=" + weight +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

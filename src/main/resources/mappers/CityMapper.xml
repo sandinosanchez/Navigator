@@ -3,63 +3,64 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.CityMapper">
-    <sql id="getCityTemplate">
-        <![CDATA[
-            SELECT  C.ID AS CITY_ID,
-                    C.NAME AS CITY_NAME,
-                    S.ID AS STATION_ID,
-                    S.NAME AS STATION_NAME,
-                    S.ADDRESS AS STATION_ADDRESS
-            FROM CITIES C
-            LEFT JOIN  STATIONS S
-                ON C.ID = S.CITY_ID
-        ]]>
-    </sql>
 
-    <select id="findById" resultMap="CityMap">
-        <include refid="getCityTemplate"/>
-        <![CDATA[
-            WHERE C.ID = #{id}
-        ]]>
-    </select>
+	<sql id="getCityTemplate">
+		<![CDATA[
+			SELECT
+				C.ID AS CITY_ID,
+				C.NAME AS CITY_NAME
+			FROM nav_db.CITIES C
+		]]>
+	</sql>
 
-    <select id="findAll" resultMap="CityMap">
-        <include refid="getCityTemplate"/>
-    </select>
+	<select id="findAll" resultMap="resultCity">
+	 	<include refid="getCityTemplate"/>
+	</select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        <![CDATA[
-                 INSERT INTO nav_db.CITIES (NAME)
-                 VALUES (
-                     #{name},
-                 );
-        ]]>
+	<select id="findById" resultMap="resultCity">
+		<include refid="getCityTemplate"/>
+		<![CDATA[
+			WHERE C.ID = #{id}
+		]]>
+	</select>
+	<select id="findByName" resultMap="resultCity">
+		<![CDATA[
+			WHERE C.NAME = #{name}
+		]]>
+	</select>
+
+    <insert id="save" keyProperty="id" useGeneratedKeys="true" flushCache="false">
+        INSERT INTO nav_db.CITIES (NAME) VALUES (#{name})
     </insert>
 
-    <update id="updateById">
-        <![CDATA[UPDATE
+	<update id="updateById">
+		<![CDATA[UPDATE
                     nav_db.CITIES
         ]]>
-        <set>
-            <if test="weight != null">
-                <![CDATA[ NAME = #{name} ]]>
-            </if>
-        </set>
-        <![CDATA[
+		<set>
+			<if test="name != null">
+				<![CDATA[ WEIGHT = #{name} ]]>
+			</if>
+		</set>
+		<![CDATA[
             WHERE ID = #{id}
         ]]>
-    </update>
+	</update>
 
-    <delete id="deleteById">
-        <![CDATA[
+	<delete id="deleteById">
+		<![CDATA[
             DELETE FROM nav_db.CITIES
             WHERE ID = #{id}
         ]]>
-    </delete>
+	</delete>
 
-    <resultMap id="CityMap" autoMapping="false" type="City">
-        <id property="id" column="CITY_ID"/>
-        <result property="name" column="CITY_NAME"/>
-        <collection property="stations" ofType="Station" resultMap="com.solvd.argwinterlab.navigator.db.dao.StationMapper.StationMap"/>
-    </resultMap>
+	<resultMap id="resultCity" type="City">
+		<id property="id" column="CITY_ID" />
+		<result property="name" column="CITY_NAME" />
+		<collection property="stations"
+					ofType="Station"
+					column="CITY_ID"
+					select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findAllByCityId"/>
+	</resultMap>
+
 </mapper>

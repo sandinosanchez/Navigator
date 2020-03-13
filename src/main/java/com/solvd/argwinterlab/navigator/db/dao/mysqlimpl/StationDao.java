@@ -46,6 +46,11 @@ public class StationDao extends AbstractDao implements StationMapper {
     }
 
     @Override
+    public Station findSimpleStationById(long id) {
+        return null;
+    }
+
+    @Override
     public List<Station> findAll() {
         try (ClosableEntity ce = new ClosableEntity(getConnection())) {
             ResultSet rs = ce.executeQuery(FIND_ALL);

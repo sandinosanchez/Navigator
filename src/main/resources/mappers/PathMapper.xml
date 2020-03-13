@@ -3,58 +3,88 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.argwinterlab.navigator.db.dao.PathMapper">
-    <sql id="getPathTemplate">
+    <sql id="pathJoinTransports">
         <![CDATA[
-            SELECT
-                PA.ID AS PATH_ID,
-                PA.DESTINY_ID AS PATH_DESTINY_STATION_ID,
-                TS.MODEL AS TRANSPORT_MODEL,
-                TS.NAME AS TRANSPORT_NAME,
-                TS.WEIGHT AS TRANSPORT_WEIGHT,
-                TS.TRANSPORT_TYPE AS TRANSPORT_TYPE
+            SELECT  P.PATH_ID AS PATH_ID,
+                    P.PATH_ORIGIN_ID AS STATION_ORIGIN_ID,
+                    P.PATH_DESTINY_ID AS STATION_DESTINY_ID,
+                    S.NAME AS DESTINY_STATION_NAME,
+                    S.ADDRESS AS DESTINY_STATION_ADDRESS,
+                    PT.TRANSPORT_ID AS TRANSPORT_ID,
+				    T.WEIGHT AS TRANSPORT_WEIGHT,
+				    T.MODEL AS TRANSPORT_MODEL,
+				    T.NAME AS TRANSPORT_NAME,
+				    T.TRANSPORT_TYPE AS TRANSPORT_TYPE
             FROM
-                nav_db.PATHS PA
-            LEFT JOIN
-                nav_db.PATH_has_TRANSPORTS PT
-                    ON PA.ID = PT.PATH_ID
-            LEFT JOIN
-                nav_db.TRANSPORTS TS
-                    ON TS.ID = PT.TRANSPORT_ID
+             (SELECT  P4.*
+             FROM
+                (SELECT  P3.ID AS PATH_ID,
+                         P3.ORIGIN_ID AS PATH_ORIGIN_ID,
+                         P3.DESTINY_ID AS PATH_DESTINY_ID
+                 FROM
+                     PATHS AS P3
+                 UNION ALL SELECT
+                     P2.PATH_ID AS PATH_ID,
+                     P2.PATH_ORIGIN_ID AS PATH_DESTINY_ID,
+                     P2.PATH_DESTINY_ID AS PATH_ORIGIN_ID
+                 FROM
+                     (SELECT P1.ID AS PATH_ID,
+                             P1.ORIGIN_ID AS PATH_DESTINY_ID,
+                             P1.DESTINY_ID AS PATH_ORIGIN_ID
+                      FROM
+                          PATHS AS P1)
+                 P2)
+             P4) P
+                LEFT JOIN
+                    nav_db.STATIONS S
+                        ON P.PATH_DESTINY_ID = S.ID
+                LEFT JOIN
+                    nav_db.PATH_has_TRANSPORTS PT
+                        ON P.PATH_ID = PT.PATH_ID
+                LEFT JOIN
+                    nav_db.TRANSPORTS T
+                        ON PT.TRANSPORT_ID = T.ID
         ]]>
     </sql>
 
+    <select id="findAllByStationId" resultMap="PathMap">
+        <include refid="pathJoinTransports"/>
+        <![CDATA[
+            WHERE P.PATH_ORIGIN_ID = #{id}
+        ]]>
+    </select>
+
     <select id="findById" resultMap="PathMap">
-        <include refid="getPathTemplate"/>
+        <include refid="pathJoinTransports"/>
         <![CDATA[
             WHERE PA.ID = #{id}
         ]]>
     </select>
 
     <select id="findAll" resultMap="PathMap">
-        <include refid="getPathTemplate"/>
+        <include refid="pathJoinTransports"/>
     </select>
 
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        <![CDATA[INSERT INTO nav_db.PATHS (DESTINY_ID)
+        <![CDATA[INSERT INTO nav_db.PATHS (ORIGIN_IF, DESTINY_ID)
                  VALUES (
-                     #{destinyId}
+                    #{originId},
+                    #{destinyId}
                  );
         ]]>
     </insert>
 
     <update id="updateById">
         <![CDATA[UPDATE
-                    nav_db.TRANSPORTS
+                    nav_db.PATHS
         ]]>
         <set>
-            <if test="weight != null">
-                <![CDATA[ WEIGHT = #{weight}, ]]>
+            <if test="originId != null">
+                <![CDATA[ ORIGIN_ID = #{originId}, ]]>
             </if>
             <if test="model != null">
-                <![CDATA[ MODEL = #{model}, ]]>
-            </if>
-            <if test="name != null">
-                <![CDATA[ NAME = #{name} ]]>
+                <![CDATA[ DESTINY_ID = #{destinyId}, ]]>
             </if>
         </set>
         <![CDATA[
@@ -64,7 +94,7 @@
 
     <delete id="delete">
         <![CDATA[
-            DELETE FROM nav_db.TRANSPORTS
+            DELETE FROM nav_db.PATHS
             WHERE ID = #{id}
         ]]>
     </delete>
@@ -72,25 +102,34 @@
     <resultMap id="PathMap" autoMapping="false" type="Path">
         <id property="id" column="PATH_ID"/>
         <association property="destiny"
-                     column="PATH_DESTINY_STATION_ID"
                      javaType="Station"
-                     select="com.solvd.argwinterlab.navigator.db.dao.StationMapper.findSimpleStationById"/>
+                     resultMap="com.solvd.argwinterlab.navigator.db.dao.StationMapper.SimpleStationMap"/>
         <discriminator javaType="int" column="TRANSPORT_TYPE">
             <case value="1">
                 <collection property="transports"
                             ofType="AbstractTransport"
-                            resultMap="com.solvd.argwinterlab.navigator.db.dao.TaxiMapper.TaxiMap"/>
+                            column="TRANSPORT_ID"
+                            select="com.solvd.argwinterlab.navigator.db.dao.TaxiMapper.findById"/>
             </case>
             <case value="2">
                 <collection property="transports"
                             ofType="AbstractTransport"
-                            resultMap="com.solvd.argwinterlab.navigator.db.dao.TrainMapper.TrainMap"/>
+                            column="TRANSPORT_ID"
+                            select="com.solvd.argwinterlab.navigator.db.dao.TrainMapper.findById"/>
             </case>
             <case value="3">
                 <collection property="transports"
                             ofType="AbstractTransport"
-                            resultMap="com.solvd.argwinterlab.navigator.db.dao.BusMapper.BusMap"/>
+                            column="TRANSPORT_ID"
+                            select="com.solvd.argwinterlab.navigator.db.dao.BusMapper.findById"/>
             </case>
         </discriminator>
+    </resultMap>
+
+    <resultMap id="AbstractTransportMap" type="AbstractTransport" autoMapping="false">
+        <id property="id" column="TRANSPORT_ID"/>
+        <result property="name" column="TRANSPORT_NAME"/>
+        <result property="model" column="TRANSPORT_MODEL"/>
+        <result property="weight" column="TRANSPORT_TYPE"/>
     </resultMap>
 </mapper>
