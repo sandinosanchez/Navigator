@@ -33,7 +33,7 @@ public class Main {
                 Gson gson = new GsonBuilder()
                         .setPrettyPrinting()
                         .create();
-                List<Result> resultList = PathSearch.getPath(station1, station2, session);
+                List<Result> resultList = new PathSearch(session).getPath(station1, station2);
                 gson.toJson(resultList, writer);
             } catch (IOException e) {
                 LOGGER.error(e);

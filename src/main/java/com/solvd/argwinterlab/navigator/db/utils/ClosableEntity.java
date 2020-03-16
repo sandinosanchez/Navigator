@@ -1,5 +1,6 @@
 package com.solvd.argwinterlab.navigator.db.utils;
 
+import com.solvd.argwinterlab.navigator.db.model.AbstractModel;
 import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,6 +43,10 @@ public class ClosableEntity implements AutoCloseable {
         statement.setLong(1, id);
         LOGGER.info("Executing query:" + statement.toString());
         statement.executeQuery();
+    }
+
+    public void executeInsert(String query, AbstractModel model) throws SQLException {
+        statement = connection.prepareStatement(query);
     }
 
 

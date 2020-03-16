@@ -18,6 +18,10 @@ public class Taxi extends AbstractTransport {
         this.company = company;
     }
 
+    public Taxi(String company) {
+        this.company = company;
+    }
+
     public String getCompany() {
         return company;
     }

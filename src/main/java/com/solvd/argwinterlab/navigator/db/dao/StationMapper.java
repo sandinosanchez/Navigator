@@ -20,4 +20,6 @@ public interface StationMapper {
 
     void deleteById(long id);
 
+    void save(Station station);
+
 }

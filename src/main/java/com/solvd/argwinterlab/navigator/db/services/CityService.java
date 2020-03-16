@@ -7,6 +7,7 @@ import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.StationDao;
 import com.solvd.argwinterlab.navigator.db.model.City;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CityService {
     private CityMapper cityMapper;
@@ -36,7 +37,15 @@ public class CityService {
     }
 
     public void save(City city) {
-        cityMapper.save(city);
+        if (Objects.nonNull(city)) cityMapper.save(city);
+    }
+
+    public void deleteById(long id) {
+        if (id > 0) cityMapper.deleteById(id);
+    }
+
+    public void updateById(City city) {
+
     }
 
     public CityMapper getCityMapper() {

@@ -7,6 +7,7 @@ import com.solvd.argwinterlab.navigator.db.dao.mysqlimpl.StationDao;
 import com.solvd.argwinterlab.navigator.db.model.Station;
 
 import java.util.List;
+import java.util.Objects;
 
 public class StationService {
     private StationMapper stationMapper;
@@ -33,6 +34,10 @@ public class StationService {
         List<Station> stations = stationMapper.findAll();
         stations.forEach(s -> s.setPaths(pathMapper.findAllByStationId(s.getId())));
         return stations;
+    }
+
+    public void save(Station station) {
+//        if (Objects.nonNull(station)) stationMapper.
     }
 
     public StationMapper getStationMapper() {

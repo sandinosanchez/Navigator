@@ -20,6 +20,7 @@ public class StationDao extends AbstractDao implements StationMapper {
     private static final String FIND_BY_NAME = "SELECT * FROM STATIONS WHERE NAME = ?";
     private static final String DELETE_BY_ID = "DELETE FROM STATIONS WHERE ID = ?";
     private static final String UPDATE_BY_ID = "UPDATE STATIONS SET ? = ? WHERE ID = ?";
+    private static final String CREATE = "INSERT INTO STATIONS (NAME, CITY_ID, ADDRESS) VALUES (?, ?, ?)";
 
     @Override
     public Station findById(long id) {
@@ -86,6 +87,13 @@ public class StationDao extends AbstractDao implements StationMapper {
             ce.executeDelete(DELETE_BY_ID, id);
         } catch (SQLException e) {
             LOGGER.error(e);
+        }
+    }
+
+    @Override
+    public void save(Station station) {
+        try (ClosableEntity ce = new ClosableEntity(getConnection())) {
+
         }
     }
 
